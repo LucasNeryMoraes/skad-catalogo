@@ -14,7 +14,7 @@ const sans = Manrope({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://skad.com.br"),
+  metadataBase: new URL("https://skad-catalogo.vercel.app"),
   title: "SKAD | Bolsas e Necessaires",
   description:
     "Bolsas e necessaires que unem elegância, qualidade e estilo para o dia a dia. Conheça o catálogo SKAD.",
