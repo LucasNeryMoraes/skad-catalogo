@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: "Manrope", "Manrope Fallback", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Cormorant Garamond Fallback", Georgia, serif;
+  --color-gold: #c8a45d;
+  --color-ink: #171714;
+  --color-cream: #f7f5f1;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: #fff; color: #171714; font-family: var(--font-sans-custom), sans-serif; }
+button, input { font: inherit; }
+button { cursor: pointer; }
+::selection { background: #c8a45d; color: #fff; }
+
+.display { font-family: var(--font-display), Georgia, serif; }
+.eyebrow { font-size: .67rem; font-weight: 700; letter-spacing: .25em; text-transform: uppercase; }
+.noise { position: relative; }
+.noise::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .035; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E"); }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes modalIn { from { opacity: 0; transform: scale(.985); } to { opacity: 1; transform: none; } }
+.fade-up { animation: fadeUp .8s cubic-bezier(.22,1,.36,1) both; }
+.fade-up-delay { animation: fadeUp .8s .15s cubic-bezier(.22,1,.36,1) both; }
+.modal-in { animation: modalIn .25s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
