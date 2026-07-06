@@ -30,6 +30,7 @@ export function Catalog({ products }: { products: Product[] }) {
         <div className="my-8 flex gap-2 overflow-x-auto pb-2" aria-label="Categorias">
           {categories.map((item) => <button key={item} onClick={() => setCategory(item)} className={`whitespace-nowrap rounded-full border px-5 py-2 text-[.65rem] font-bold uppercase tracking-[.16em] transition-all ${category === item ? "border-[#171714] bg-[#171714] text-white" : "border-black/15 hover:border-black/60"}`}>{item}</button>)}
         </div>
+        <p className="sr-only" aria-live="polite">{visible.length} produtos encontrados</p>
         {visible.length ? (
           <div className="grid grid-cols-1 gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {visible.map((product, index) => (
