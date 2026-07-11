@@ -39,7 +39,7 @@ export function Catalog({ products }: { products: Product[] }) {
                   <Image src={product.images[0]} alt={product.name} fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.035]" priority={index < 3} />
                   <span className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-lg shadow-sm backdrop-blur transition-transform group-hover:rotate-45">+</span>
                 </div>
-                <div className="flex items-start justify-between border-b border-black/10 py-5"><div><p className="eyebrow mb-2 text-black/40">{product.category}</p><h3 className="display text-2xl font-medium sm:text-3xl">{product.name}</h3></div><span className="mt-1 text-xs text-[#9a7739]">0{product.images.length}</span></div>
+                <div className="flex items-start justify-between border-b border-black/10 py-5"><div><p className="eyebrow mb-2 text-black/40">{product.category}</p><h3 className="display text-2xl font-medium sm:text-3xl">{product.name}</h3>{product.description && <p className="mt-3 text-sm leading-5 text-black/55">{product.description}</p>}</div><span className="mt-1 text-xs text-[#9a7739]">0{product.images.length}</span></div>
               </button>
             ))}
           </div>

@@ -2,6 +2,7 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios";
+  description?: string;
   images: string[];
 };
 
@@ -22,5 +23,5 @@ export const products: Product[] = [
   { id: "necessaire-puff", name: "Necessaire Puff", category: "Necessaires", images: imageList("necessaire-puff", 2) },
   { id: "necessaire-urbana", name: "Necessaire Urbana", category: "Necessaires", images: imageList("necessaire-urbana", 4, "jpeg") },
   { id: "lancheira-termica-2-compartimentos", name: "Lancheira Térmica com 2 Compartimentos", category: "Lancheiras", images: imageList("lancheira-termica-2-compartimentos", 5) },
-  { id: "porta-garrafa-12l", name: "Porta-Garrafa para Garrafas de até 1,2 L", category: "Acessórios", images: imageList("porta-garrafa-12l", 13) },
+  { id: "porta-garrafa-12l", name: "Porta-Garrafa para Garrafas de até 1,2 L", category: "Acessórios", description: "Pintado à mão.", images: imageList("porta-garrafa-12l", 13) },
 ];
