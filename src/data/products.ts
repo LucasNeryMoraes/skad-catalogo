@@ -23,7 +23,7 @@ export const products: Product[] = [
   { id: "necessaire-puff", name: "Necessaire Puff", category: "Necessaires", images: imageList("necessaire-puff", 2) },
   { id: "necessaire-urbana", name: "Necessaire Urbana", category: "Necessaires", images: imageList("necessaire-urbana", 4, "jpeg") },
   { id: "lancheira-termica-2-compartimentos", name: "Lancheira Térmica com 2 Compartimentos", category: "Lancheiras", images: imageList("lancheira-termica-2-compartimentos", 5) },
-  { id: "porta-garrafa-12l", name: "Porta-Garrafa para Garrafas de até 1,2 L", category: "Acessórios", description: "Pintado à mão.", images: imageList("porta-garrafa-12l", 13) },
+  { id: "porta-garrafa-12l", name: "Porta-Garrafa para Garrafas de até 1,2 L", category: "Acessórios", description: "Pintado à mão.", images: imageList("porta-garrafa-12l", 15) },
   { id: "shoulder-bag-bordada-pedrarias", name: "Shoulder Bag Bordada com Pedrarias", category: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-bordada-pedrarias", 3) },
   { id: "shoulder-bag-bordada-micangas", name: "Shoulder Bag Bordada com Miçangas", category: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-bordada-micangas", 3) },
   { id: "shoulder-bag-pintadas-mao", name: "Shoulder Bag Pintadas à Mão", category: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-pintadas-mao", 26) },
