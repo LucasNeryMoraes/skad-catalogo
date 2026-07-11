@@ -1,20 +1,194 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { PointerEvent, TouchEvent } from "react";
 import type { Product } from "@/data/products";
 import { ChevronIcon, CloseIcon } from "./icons";
 
+const MIN_SCALE = 1;
+const DOUBLE_TAP_SCALE = 2.4;
+const MAX_SCALE = 4;
+const SWIPE_THRESHOLD = 56;
+
+type Point = { x: number; y: number };
+type Transform = { scale: number; x: number; y: number };
+type TouchLike = { clientX: number; clientY: number };
+
+const distance = (a: TouchLike, b: TouchLike) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+const midpoint = (a: TouchLike, b: TouchLike): Point => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
+const clampScale = (value: number) => Math.min(MAX_SCALE, Math.max(MIN_SCALE, value));
+
 export function ProductModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const [index, setIndex] = useState(0);
+  const [transform, setTransform] = useState<Transform>({ scale: MIN_SCALE, x: 0, y: 0 });
+  const gesture = useRef({
+    startPoint: { x: 0, y: 0 },
+    lastPoint: { x: 0, y: 0 },
+    startDistance: 0,
+    startMidpoint: { x: 0, y: 0 },
+    startTransform: { scale: MIN_SCALE, x: 0, y: 0 },
+    moved: false,
+    pinching: false,
+    lastTap: 0,
+    pointerActive: false,
+  });
+
   const move = useCallback(
     (direction: number) => setIndex((current) => (current + direction + product.images.length) % product.images.length),
     [product.images.length],
   );
 
+  const toggleZoom = useCallback(() => {
+    setTransform((current) => (current.scale > MIN_SCALE ? { scale: MIN_SCALE, x: 0, y: 0 } : { scale: DOUBLE_TAP_SCALE, x: 0, y: 0 }));
+  }, []);
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    const first = event.touches[0];
+    if (!first) return;
+
+    if (event.touches.length === 2) {
+      const second = event.touches[1];
+      gesture.current = {
+        ...gesture.current,
+        startDistance: distance(first, second),
+        startMidpoint: midpoint(first, second),
+        startTransform: transform,
+        moved: false,
+        pinching: true,
+      };
+      return;
+    }
+
+    const point = { x: first.clientX, y: first.clientY };
+    gesture.current = {
+      ...gesture.current,
+      startPoint: point,
+      lastPoint: point,
+      startTransform: transform,
+      moved: false,
+      pinching: false,
+    };
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    const first = event.touches[0];
+    if (!first) return;
+
+    if (event.touches.length === 2) {
+      event.preventDefault();
+      const second = event.touches[1];
+      const currentDistance = distance(first, second);
+      const currentMidpoint = midpoint(first, second);
+      const nextScale = clampScale((gesture.current.startTransform.scale * currentDistance) / Math.max(gesture.current.startDistance, 1));
+      const midpointDelta = {
+        x: currentMidpoint.x - gesture.current.startMidpoint.x,
+        y: currentMidpoint.y - gesture.current.startMidpoint.y,
+      };
+
+      gesture.current.moved = true;
+      setTransform({
+        scale: nextScale,
+        x: gesture.current.startTransform.x + midpointDelta.x,
+        y: gesture.current.startTransform.y + midpointDelta.y,
+      });
+      return;
+    }
+
+    const point = { x: first.clientX, y: first.clientY };
+    const dx = point.x - gesture.current.startPoint.x;
+    const dy = point.y - gesture.current.startPoint.y;
+
+    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) gesture.current.moved = true;
+
+    if (transform.scale > MIN_SCALE) {
+      event.preventDefault();
+      setTransform({
+        scale: transform.scale,
+        x: gesture.current.startTransform.x + dx,
+        y: gesture.current.startTransform.y + dy,
+      });
+    }
+
+    gesture.current.lastPoint = point;
+  };
+
+  const handleTouchEnd = () => {
+    if (gesture.current.pinching) {
+      gesture.current.pinching = false;
+      return;
+    }
+
+    const dx = gesture.current.lastPoint.x - gesture.current.startPoint.x;
+    const dy = gesture.current.lastPoint.y - gesture.current.startPoint.y;
+    const now = Date.now();
+
+    if (!gesture.current.moved && now - gesture.current.lastTap < 280) {
+      gesture.current.lastTap = 0;
+      toggleZoom();
+      return;
+    }
+
+    if (!gesture.current.moved) {
+      gesture.current.lastTap = now;
+      return;
+    }
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      move(dx < 0 ? 1 : -1);
+    }
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch") return;
+    const point = { x: event.clientX, y: event.clientY };
+    gesture.current = {
+      ...gesture.current,
+      startPoint: point,
+      lastPoint: point,
+      startTransform: transform,
+      moved: false,
+      pointerActive: true,
+    };
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch" || !gesture.current.pointerActive) return;
+
+    const point = { x: event.clientX, y: event.clientY };
+    const dx = point.x - gesture.current.startPoint.x;
+    const dy = point.y - gesture.current.startPoint.y;
+
+    if (Math.abs(dx) > 8 || Math.abs(dy) > 8) gesture.current.moved = true;
+
+    if (transform.scale > MIN_SCALE) {
+      setTransform({
+        scale: transform.scale,
+        x: gesture.current.startTransform.x + dx,
+        y: gesture.current.startTransform.y + dy,
+      });
+    }
+
+    gesture.current.lastPoint = point;
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (event.pointerType === "touch" || !gesture.current.pointerActive) return;
+    gesture.current.pointerActive = false;
+
+    const dx = gesture.current.lastPoint.x - gesture.current.startPoint.x;
+    const dy = gesture.current.lastPoint.y - gesture.current.startPoint.y;
+
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > SWIPE_THRESHOLD) {
+      move(dx < 0 ? 1 : -1);
+    }
+  };
+
   useEffect(() => {
-    const previous = document.body.style.overflow;
+    const previousOverflow = document.body.style.overflow;
+    const previousTouchAction = document.body.style.touchAction;
     document.body.style.overflow = "hidden";
+    document.body.style.touchAction = "none";
 
     const keydown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -24,7 +198,8 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
 
     window.addEventListener("keydown", keydown);
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = previousOverflow;
+      document.body.style.touchAction = previousTouchAction;
       window.removeEventListener("keydown", keydown);
     };
   }, [move, onClose]);
@@ -35,50 +210,67 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
       aria-modal="true"
       aria-label={product.name}
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-2 backdrop-blur-sm sm:p-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black p-0 text-white backdrop-blur-sm lg:bg-black/85 lg:p-6"
     >
-      <div className="modal-in relative grid h-[calc(100svh-1rem)] w-full max-w-6xl grid-rows-[minmax(0,1fr)_auto] overflow-hidden bg-white sm:h-[min(92vh,900px)] lg:grid-cols-[1fr_320px] lg:grid-rows-none">
-        <div className="relative min-h-0 bg-[#eeeae3]">
-          <Image
-            src={product.images[index]}
-            alt={`${product.name}, foto ${index + 1}`}
-            fill
-            sizes="(max-width: 1024px) 100vw, 70vw"
-            className="object-contain"
-            priority
-          />
+      <div className="modal-in relative h-[100svh] w-screen overflow-hidden bg-black lg:grid lg:h-[min(92vh,900px)] lg:w-full lg:max-w-6xl lg:grid-cols-[1fr_320px] lg:bg-white">
+        <div
+          className="relative flex h-full min-h-0 w-full touch-none select-none items-center justify-center overflow-hidden bg-black lg:bg-[#eeeae3]"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          onDoubleClick={toggleZoom}
+        >
+          <div
+            className="relative h-full max-h-[90svh] w-full max-w-[100vw] transition-transform duration-150 ease-out lg:max-h-none lg:max-w-none"
+            style={{ transform: `translate3d(${transform.x}px, ${transform.y}px, 0) scale(${transform.scale})` }}
+          >
+            <Image
+              src={product.images[index]}
+              alt={`${product.name}, foto ${index + 1}`}
+              fill
+              sizes="(max-width: 1024px) 100vw, 70vw"
+              quality={100}
+              unoptimized
+              className="object-contain"
+              priority
+            />
+          </div>
         </div>
 
-        <aside className="flex min-h-[172px] flex-col justify-between p-4 sm:min-h-[150px] sm:p-8">
-          <button
-            onClick={onClose}
-            className="absolute right-3 top-3 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md lg:static lg:h-10 lg:w-10 lg:self-end lg:shadow-none"
-            aria-label="Fechar"
-          >
+        <button onClick={onClose} className="absolute right-3 top-3 z-20 flex h-12 w-12 items-center justify-center rounded-full bg-white/95 text-black shadow-md lg:hidden" aria-label="Fechar">
+          <CloseIcon className="h-5 w-5" />
+        </button>
+
+        <aside className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-3 pb-3 pt-24 text-white lg:pointer-events-auto lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:min-h-[150px] lg:flex-col lg:justify-between lg:bg-white lg:p-8 lg:text-[#171714]">
+          <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full bg-white text-black lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
-          <div className="pr-12 lg:pr-0">
-            <p className="eyebrow mb-2 text-[#9a7739] sm:mb-3">{product.category}</p>
-            <h2 className="display text-3xl font-medium leading-[1.02] sm:text-4xl">{product.name}</h2>
+          <div className="pointer-events-auto pr-16 lg:pr-0">
+            <p className="eyebrow mb-2 text-[#d7b978] lg:mb-3 lg:text-[#9a7739]">{product.category}</p>
+            <h2 className="display line-clamp-2 text-[1.85rem] font-medium leading-[.98] lg:text-4xl">{product.name}</h2>
             {product.description && (
-              <p className="mt-3 inline-flex rounded-full border border-[#C8A45D]/40 px-3 py-2 text-[.64rem] font-bold uppercase tracking-[.14em] text-[#9a7739] sm:mt-4 sm:px-4 sm:text-xs sm:tracking-[.16em]">
+              <p className="mt-2 inline-flex rounded-full border border-[#C8A45D]/40 px-3 py-2 text-[.6rem] font-bold uppercase tracking-[.12em] text-[#d7b978] lg:mt-4 lg:px-4 lg:text-xs lg:tracking-[.16em] lg:text-[#9a7739]">
                 {product.description}
               </p>
             )}
             <p className="mt-4 hidden text-sm leading-6 text-black/55 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
           </div>
 
-          <div className="mt-4 flex items-center justify-between border-t border-black/10 pt-4 sm:mt-5 sm:pt-5">
-            <span className="text-xs tracking-[.2em] text-black/50">
+          <div className="pointer-events-auto mt-3 flex items-center justify-between border-t border-white/15 pt-3 lg:mt-5 lg:border-black/10 lg:pt-5">
+            <span className="text-xs tracking-[.2em] text-white/70 lg:text-black/50">
               {String(index + 1).padStart(2, "0")} / {String(product.images.length).padStart(2, "0")}
             </span>
             {product.images.length > 1 && (
               <div className="flex gap-2">
-                <button onClick={() => move(-1)} className="flex h-12 w-12 items-center justify-center border border-black/15 transition hover:bg-black hover:text-white sm:h-10 sm:w-10" aria-label="Foto anterior">
+                <button onClick={() => move(-1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-10 lg:w-10 lg:border-black/15 lg:bg-white lg:text-black lg:hover:bg-black lg:hover:text-white" aria-label="Foto anterior">
                   <ChevronIcon className="h-5 w-5 rotate-180" />
                 </button>
-                <button onClick={() => move(1)} className="flex h-12 w-12 items-center justify-center border border-black/15 transition hover:bg-black hover:text-white sm:h-10 sm:w-10" aria-label="Próxima foto">
+                <button onClick={() => move(1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-10 lg:w-10 lg:border-black/15 lg:bg-white lg:text-black lg:hover:bg-black lg:hover:text-white" aria-label="Próxima foto">
                   <ChevronIcon className="h-5 w-5" />
                 </button>
               </div>
