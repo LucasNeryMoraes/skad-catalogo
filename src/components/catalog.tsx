@@ -118,7 +118,6 @@ export function Catalog({ products }: { products: Product[] }) {
                 </div>
                 <div className="flex items-start justify-between gap-4 border-b border-black/10 py-5">
                   <div>
-                    <p className="eyebrow mb-2 text-black/40">{product.subcategory ?? product.category}</p>
                     <h3 className="display text-[2rem] font-medium leading-[1.02] sm:text-[2.25rem] md:text-3xl">{product.name}</h3>
                     {product.description && <p className="mt-3 text-base leading-6 text-black/55 md:text-sm md:leading-5">{product.description}</p>}
                   </div>
