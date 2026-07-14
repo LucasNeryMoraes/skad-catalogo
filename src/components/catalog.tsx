@@ -9,17 +9,30 @@ import { ProductModal } from "./product-modal";
 export function Catalog({ products }: { products: Product[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Todos");
+  const [subcategory, setSubcategory] = useState("Todos");
   const [selected, setSelected] = useState<Product | null>(null);
   const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.category)))];
+  const subcategories = useMemo(
+    () =>
+      category === "Bolsas"
+        ? Array.from(new Set(products.filter((p) => p.category === "Bolsas" && p.subcategory).map((p) => p.subcategory!)))
+        : [],
+    [products, category],
+  );
   const visible = useMemo(
     () =>
       products.filter(
         (p) =>
           (category === "Todos" || p.category === category) &&
+          (category !== "Bolsas" || subcategory === "Todos" || p.subcategory === subcategory) &&
           p.name.toLocaleLowerCase("pt-BR").includes(query.trim().toLocaleLowerCase("pt-BR")),
       ),
-    [products, category, query],
+    [products, category, subcategory, query],
   );
+  const selectCategory = (item: string) => {
+    setCategory(item);
+    setSubcategory("Todos");
+  };
 
   return (
     <section id="catalogo" className="scroll-mt-20 bg-[#f7f5f1] px-2 py-16 sm:px-4 sm:py-20 md:px-8 md:py-28">
@@ -53,7 +66,7 @@ export function Catalog({ products }: { products: Product[] }) {
           {categories.map((item) => (
             <button
               key={item}
-              onClick={() => setCategory(item)}
+              onClick={() => selectCategory(item)}
               className={`min-h-11 whitespace-nowrap rounded-full border px-5 py-3 text-[.67rem] font-bold uppercase tracking-[.16em] transition-all md:min-h-0 md:py-2 ${
                 category === item ? "border-[#171714] bg-[#171714] text-white" : "border-black/15 hover:border-black/60"
               }`}
@@ -62,6 +75,25 @@ export function Catalog({ products }: { products: Product[] }) {
             </button>
           ))}
         </div>
+
+        {subcategories.length > 0 && (
+          <div
+            className="no-scrollbar -mt-3 mb-6 -mx-2 flex gap-2 overflow-x-auto px-2 pb-2 sm:-mx-4 sm:px-4 md:mx-0 md:mb-8 md:px-0"
+            aria-label="Tipos de bolsas"
+          >
+            {["Todos", ...subcategories].map((item) => (
+              <button
+                key={item}
+                onClick={() => setSubcategory(item)}
+                className={`min-h-11 whitespace-nowrap rounded-full border px-5 py-3 text-[.64rem] font-bold uppercase tracking-[.16em] transition-all md:min-h-0 md:py-2 ${
+                  subcategory === item ? "border-[#9a7739] bg-[#9a7739] text-white" : "border-black/15 bg-white/45 hover:border-[#9a7739]"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
 
         <p className="sr-only" aria-live="polite">
           {visible.length} produtos encontrados
@@ -86,7 +118,7 @@ export function Catalog({ products }: { products: Product[] }) {
                 </div>
                 <div className="flex items-start justify-between gap-4 border-b border-black/10 py-5">
                   <div>
-                    <p className="eyebrow mb-2 text-black/40">{product.category}</p>
+                    <p className="eyebrow mb-2 text-black/40">{product.subcategory ?? product.category}</p>
                     <h3 className="display text-[2rem] font-medium leading-[1.02] sm:text-[2.25rem] md:text-3xl">{product.name}</h3>
                     {product.description && <p className="mt-3 text-base leading-6 text-black/55 md:text-sm md:leading-5">{product.description}</p>}
                   </div>
@@ -98,7 +130,7 @@ export function Catalog({ products }: { products: Product[] }) {
         ) : (
           <div className="py-24 text-center">
             <p className="display text-3xl">Nenhum produto encontrado.</p>
-            <button onClick={() => { setQuery(""); setCategory("Todos"); }} className="mt-4 min-h-11 px-4 text-xs font-bold uppercase tracking-widest text-[#9a7739]">
+            <button onClick={() => { setQuery(""); selectCategory("Todos"); }} className="mt-4 min-h-11 px-4 text-xs font-bold uppercase tracking-widest text-[#9a7739]">
               Limpar filtros
             </button>
           </div>
