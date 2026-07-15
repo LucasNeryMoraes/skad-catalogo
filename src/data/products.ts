@@ -16,6 +16,8 @@ export const products: Product[] = [
   { id: "necessaire-boca-de-lobo", name: "Necessaire Boca de Lobo", category: "Necessaires", images: imageList("necessaire-boca-de-lobo", 3) },
   { id: "necessaire-boss", name: "Necessaire Boss", category: "Necessaires", images: imageList("necessaire-boss", 2) },
   { id: "necessaire-box-supreme", name: "Necessaire Box Suprême", category: "Necessaires", images: imageList("necessaire-box-supreme", 6) },
+  { id: "necessaire-carnauba-1", name: "Necessaire Carnaúba", category: "Necessaires", images: imageList("necessaire-carnauba-1", 3) },
+  { id: "necessaire-carnauba-2", name: "Necessaire Carnaúba", category: "Necessaires", images: imageList("necessaire-carnauba-2", 3) },
   { id: "necessaire-classica", name: "Necessaire Clássica", category: "Necessaires", images: imageList("necessaire-classica", 2) },
   { id: "necessaire-cursiva", name: "Necessaire Cursiva", category: "Necessaires", images: imageList("necessaire-cursiva", 2) },
   { id: "necessaire-estetoscopio", name: "Necessaire Estetoscópio", category: "Necessaires", images: imageList("necessaire-estetoscopio", 4) },
