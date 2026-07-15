@@ -245,31 +245,32 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <aside className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-3 pb-3 pt-24 text-white lg:pointer-events-auto lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:min-h-[150px] lg:flex-col lg:justify-between lg:bg-white lg:p-8 lg:text-[#171714]">
-          <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full bg-white text-black lg:flex" aria-label="Fechar">
+        <aside className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/88 via-black/55 to-transparent px-3 pb-3 pt-24 text-white lg:pointer-events-auto lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
+          <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-[#C8A45D]/70 hover:text-[#9a7739] lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
           <div className="pointer-events-auto pr-16 lg:pr-0">
-            <h2 className="display text-[1.75rem] font-medium leading-[1.02] lg:text-[2.35rem]">{product.name}</h2>
+            <div className="hidden h-px w-14 bg-[#C8A45D] lg:mb-8 lg:block" />
+            <h2 className="display text-[1.75rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
             {product.description && (
-              <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/55 bg-[#171714]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.12em] text-[#f6edda] shadow-[0_14px_35px_rgba(0,0,0,.22)] backdrop-blur lg:mt-4 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.72rem] lg:tracking-[.14em]">
+              <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
                 {product.description}
               </p>
             )}
-            <p className="mt-4 hidden text-sm leading-6 text-black/55 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
+            <p className="mt-5 hidden text-[.95rem] leading-7 text-black/65 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
           </div>
 
-          <div className="pointer-events-auto mt-3 flex items-center justify-between border-t border-white/15 pt-3 lg:mt-5 lg:border-black/10 lg:pt-5">
-            <span className="text-xs tracking-[.2em] text-white/70 lg:text-black/50">
+          <div className="pointer-events-auto mt-3 flex items-center justify-between border-t border-white/15 pt-3 lg:mt-6 lg:border-[#C8A45D]/30 lg:pt-5">
+            <span className="text-xs tracking-[.2em] text-white/70 lg:font-semibold lg:text-[#9a7739]">
               {String(index + 1).padStart(2, "0")} / {String(product.images.length).padStart(2, "0")}
             </span>
             {product.images.length > 1 && (
               <div className="flex gap-2">
-                <button onClick={() => move(-1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-10 lg:w-10 lg:border-black/15 lg:bg-white lg:text-black lg:hover:bg-black lg:hover:text-white" aria-label="Foto anterior">
+                <button onClick={() => move(-1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-11 lg:w-11 lg:border-[#171714] lg:bg-[#171714] lg:text-[#f8f1e6] lg:hover:border-[#C8A45D] lg:hover:bg-[#C8A45D] lg:hover:text-[#171714]" aria-label="Foto anterior">
                   <ChevronIcon className="h-5 w-5 rotate-180" />
                 </button>
-                <button onClick={() => move(1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-10 lg:w-10 lg:border-black/15 lg:bg-white lg:text-black lg:hover:bg-black lg:hover:text-white" aria-label="Próxima foto">
+                <button onClick={() => move(1)} className="flex h-12 w-12 items-center justify-center border border-white/25 bg-black/20 text-white backdrop-blur transition hover:bg-white hover:text-black lg:h-11 lg:w-11 lg:border-[#171714] lg:bg-[#171714] lg:text-[#f8f1e6] lg:hover:border-[#C8A45D] lg:hover:bg-[#C8A45D] lg:hover:text-[#171714]" aria-label="Próxima foto">
                   <ChevronIcon className="h-5 w-5" />
                 </button>
               </div>
