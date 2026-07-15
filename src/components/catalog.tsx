@@ -109,9 +109,7 @@ export function Catalog({ products }: { products: Product[] }) {
                     alt={product.name}
                     fill
                     sizes="(max-width: 767px) 96vw, (max-width: 1024px) 50vw, 33vw"
-                    className={`object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.035] ${
-                      product.id.startsWith("shoulder-bag-piauiense-serra-da-capivara") ? "md:object-contain" : "md:object-cover"
-                    }`}
+                    className="object-contain object-center transition-transform duration-700 ease-out group-hover:scale-[1.035] md:object-cover md:object-center"
                     priority={index < 3}
                   />
                   <span className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-xl shadow-sm backdrop-blur transition-transform group-hover:rotate-45 md:h-10 md:w-10 md:text-lg">
