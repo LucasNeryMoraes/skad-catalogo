@@ -253,7 +253,7 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <div className="pointer-events-auto pr-16 lg:pr-0">
             <h2 className="display text-[1.75rem] font-medium leading-[1.02] lg:text-[2.35rem]">{product.name}</h2>
             {product.description && (
-              <p className="mt-2 inline-flex rounded-full border border-[#C8A45D]/40 px-3 py-2 text-[.6rem] font-bold uppercase tracking-[.12em] text-[#d7b978] lg:mt-4 lg:px-4 lg:text-xs lg:tracking-[.16em] lg:text-[#9a7739]">
+              <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/55 bg-[#171714]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.12em] text-[#f6edda] shadow-[0_14px_35px_rgba(0,0,0,.22)] backdrop-blur lg:mt-4 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.72rem] lg:tracking-[.14em]">
                 {product.description}
               </p>
             )}
