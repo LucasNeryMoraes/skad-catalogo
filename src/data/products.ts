@@ -39,4 +39,5 @@ export const products: Product[] = [
   { id: "shoulder-bag-piauiense-caju-6", name: "Shoulder Bag com Estampas Piauienses - Caju", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-piauiense-caju-6", 3) },
   { id: "shoulder-bag-piauiense-guara", name: "Shoulder Bag com Estampas Piauienses - Guará", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-piauiense-guara", 3) },
   { id: "shoulder-bag-piauiense-guara-2", name: "Shoulder Bag com Estampas Piauienses - Guará", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-piauiense-guara-2", 3) },
+  { id: "shoulder-bag-piauiense-revoada-guaras-delta-parnaiba", name: "Shoulder Bag com Estampas Piauienses - Revoada dos Guarás no Delta do Parnaíba", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", images: imageList("shoulder-bag-piauiense-revoada-guaras-delta-parnaiba", 3) },
 ];
