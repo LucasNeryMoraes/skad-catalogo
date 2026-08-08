@@ -18,6 +18,11 @@ type TouchLike = { clientX: number; clientY: number };
 const distance = (a: TouchLike, b: TouchLike) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
 const midpoint = (a: TouchLike, b: TouchLike): Point => ({ x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 });
 const clampScale = (value: number) => Math.min(MAX_SCALE, Math.max(MIN_SCALE, value));
+const formatCurrency = (value: number) =>
+  value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
 
 export function ProductModal({ product, onClose }: { product: Product; onClose: () => void }) {
   const [index, setIndex] = useState(0);
@@ -258,6 +263,16 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
                 {product.description}
               </p>
             )}
+            <div className="mt-4 grid max-w-[18rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:bg-[#171714] lg:text-[#fff7e7]">
+              <div className="border-r border-[#C8A45D]/35 px-4 py-3">
+                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#9a7739]">Valor</span>
+                <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.price)}</strong>
+              </div>
+              <div className="px-4 py-3">
+                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#C8A45D]">Pix</span>
+                <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.pixPrice)}</strong>
+              </div>
+            </div>
             <p className="mt-5 hidden text-[.95rem] leading-7 text-black/65 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
           </div>
 
