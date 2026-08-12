@@ -217,9 +217,9 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
       onMouseDown={(e) => e.target === e.currentTarget && onClose()}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black p-0 text-white backdrop-blur-sm lg:bg-black/85 lg:p-6"
     >
-      <div className="modal-in relative h-[100svh] w-screen overflow-hidden bg-black lg:grid lg:h-[min(92vh,900px)] lg:w-full lg:max-w-6xl lg:grid-cols-[1fr_320px] lg:bg-white">
+      <div className="modal-in relative flex h-[100svh] w-screen flex-col overflow-hidden bg-black lg:grid lg:h-[min(92vh,900px)] lg:w-full lg:max-w-6xl lg:grid-cols-[1fr_320px] lg:bg-white">
         <div
-          className="relative flex h-full min-h-0 w-full touch-none select-none items-center justify-center overflow-hidden bg-black lg:bg-[#eeeae3]"
+          className="relative flex min-h-0 flex-1 touch-none select-none items-center justify-center overflow-hidden bg-black lg:h-full lg:w-full lg:bg-[#eeeae3]"
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
@@ -250,32 +250,32 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <aside className="pointer-events-auto absolute inset-x-0 bottom-0 z-10 max-h-[62svh] overflow-y-auto bg-gradient-to-t from-black/88 via-black/55 to-transparent px-3 pb-3 pt-24 text-white lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:max-h-none lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
+        <aside className="pointer-events-auto relative z-10 shrink-0 border-t border-white/10 bg-black px-3 pb-[calc(.75rem+env(safe-area-inset-bottom))] pt-3 text-white lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:max-h-none lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-t-0 lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
           <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-[#C8A45D]/70 hover:text-[#9a7739] lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
           <div className="pointer-events-auto pr-16 lg:pr-0">
             <div className="hidden h-px w-14 bg-[#C8A45D] lg:mb-8 lg:block" />
-            {product.collection && <p className="mb-3 text-[.62rem] font-bold uppercase tracking-[.22em] text-[#C8A45D] lg:text-[#9a7739]">{product.collection}</p>}
-            <h2 className="display text-[1.75rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
+            {product.collection && <p className="mb-1.5 text-[.58rem] font-bold uppercase tracking-[.22em] text-[#C8A45D] lg:mb-3 lg:text-[.62rem] lg:text-[#9a7739]">{product.collection}</p>}
+            <h2 className="display line-clamp-2 text-[1.25rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:line-clamp-none lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
             {product.description && (
-              <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
+              <p className="mt-3 hidden max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:inline-flex lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
                 {product.description}
               </p>
             )}
-            <div className="mt-4 grid max-w-[18rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:bg-[#171714] lg:text-[#fff7e7]">
-              <div className="border-r border-[#C8A45D]/35 px-4 py-3">
-                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#9a7739]">Cartão</span>
-                <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.price)}</strong>
+            <div className="mt-3 grid max-w-[15rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:max-w-[18rem] lg:bg-[#171714] lg:text-[#fff7e7]">
+              <div className="border-r border-[#C8A45D]/35 px-3 py-2 lg:px-4 lg:py-3">
+                <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#9a7739] lg:text-[.62rem]">Cartão</span>
+                <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.price)}</strong>
               </div>
-              <div className="px-4 py-3">
-                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#C8A45D]">Pix</span>
-                <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.pixPrice)}</strong>
+              <div className="px-3 py-2 lg:px-4 lg:py-3">
+                <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[.62rem]">Pix</span>
+                <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.pixPrice)}</strong>
               </div>
             </div>
             {product.details && (
-              <div className="mt-5 space-y-3 rounded-3xl border border-white/15 bg-black/20 p-4 text-sm leading-6 text-white/86 backdrop-blur lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
+              <div className="mt-5 hidden space-y-3 rounded-3xl border border-white/15 bg-black/20 p-4 text-sm leading-6 text-white/86 backdrop-blur lg:block lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
                 {product.material && (
                   <p className="text-[.68rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[#9a7739]">Material: {product.material}</p>
                 )}
