@@ -250,12 +250,12 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <aside className="pointer-events-auto relative z-10 flex max-h-[46svh] shrink-0 flex-col overflow-hidden border-t border-white/10 bg-black px-3 pb-[calc(.75rem+env(safe-area-inset-bottom))] pt-3 text-white lg:static lg:col-start-2 lg:row-start-1 lg:max-h-none lg:min-h-[150px] lg:overflow-y-auto lg:border-l lg:border-t-0 lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
+        <aside className="pointer-events-auto relative z-10 flex max-h-[46svh] shrink-0 flex-col overflow-hidden border-t border-white/10 bg-black px-3 pb-[calc(.75rem+env(safe-area-inset-bottom))] pt-3 text-white lg:static lg:col-start-2 lg:row-start-1 lg:max-h-none lg:min-h-0 lg:border-l lg:border-t-0 lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
           <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-[#C8A45D]/70 hover:text-[#9a7739] lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
-          <div className="pointer-events-auto min-h-0 overflow-y-auto pr-16 lg:overflow-visible lg:pr-0">
+          <div className="pointer-events-auto min-h-0 overflow-y-auto pr-16 lg:flex-1 lg:pr-1">
             <div className="hidden h-px w-14 bg-[#C8A45D] lg:mb-8 lg:block" />
             {product.collection && <p className="mb-1.5 text-[.58rem] font-bold uppercase tracking-[.22em] text-[#C8A45D] lg:mb-3 lg:text-[.62rem] lg:text-[#9a7739]">{product.collection}</p>}
             <h2 className="display line-clamp-2 text-[1.25rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:line-clamp-none lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
