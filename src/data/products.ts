@@ -2,8 +2,13 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag";
+  subcategory?: "Shoulder Bag" | "Max Bag";
   description?: string;
+  collection?: string;
+  details?: string[];
+  features?: string[];
+  material?: string;
+  dimensions?: string;
   price: number;
   pixPrice: number;
   images: string[];
@@ -42,4 +47,56 @@ export const products: Product[] = [
   { id: "shoulder-bag-piauiense-guara", name: "Shoulder Bag com Estampas Piauienses - Guará", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", price: 125, pixPrice: 115, images: imageList("shoulder-bag-piauiense-guara", 3) },
   { id: "shoulder-bag-piauiense-guara-2", name: "Shoulder Bag com Estampas Piauienses - Guará", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", price: 125, pixPrice: 115, images: imageList("shoulder-bag-piauiense-guara-2", 3) },
   { id: "shoulder-bag-piauiense-revoada-guaras-delta-parnaiba", name: "Shoulder Bag com Estampas Piauienses - Revoada dos Guarás no Delta do Parnaíba", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", price: 125, pixPrice: 115, images: imageList("shoulder-bag-piauiense-revoada-guaras-delta-parnaiba", 3) },
+  {
+    id: "max-bag-caju",
+    name: "MAX BAG - Cajú",
+    category: "Bolsas",
+    subcategory: "Max Bag",
+    collection: "Coleção Raízes",
+    description: "Coleção Raízes • Veludo • 28 x 40 x 12 cm.",
+    details: [
+      "Raízes que carregam histórias.",
+      "Uma bolsa que traduz o Piauí em cada detalhe.",
+      "Confeccionada em tecido veludo, com estampa exclusiva SKAD, inspirada no caju, fruto símbolo da nossa terra, e detalhes bordados à mão, que tornam cada peça ainda mais especial.",
+      "Uma peça autoral, feita para quem valoriza elegância, artesanato e orgulho de suas raízes.",
+      "SKAD — regionalidade é raiz, o artesanato é memória.",
+    ],
+    features: [
+      "Bolso externo com zíper",
+      "1 bolso interno com zíper",
+      "2 bolsos internos de acesso rápido",
+      "Porta-chaves interno",
+      "Acabamento cuidadoso em cada detalhe",
+    ],
+    material: "Veludo",
+    dimensions: "Altura x Largura x Profundidade: 28 x 40 x 12 cm.",
+    price: 308,
+    pixPrice: 280,
+    images: imageList("max-bag-caju", 5, "jpeg"),
+  },
+  {
+    id: "max-bag-revoada-dos-guaras",
+    name: "MAX BAG - Revoada dos Guarás",
+    category: "Bolsas",
+    subcategory: "Max Bag",
+    collection: "Coleção Raízes",
+    description: "Coleção Raízes • Veludo • 28 x 40 x 12 cm.",
+    details: [
+      "Há lugares que a gente carrega no coração. E há histórias que escolhemos carregar no corpo.",
+      "A nova bolsa da SKAD traz uma estampa exclusiva, inspirada na revoada dos guarás do Delta do Parnaíba, um espetáculo de cores, natureza e identidade piauiense.",
+      "Cada detalhe dessa peça foi pensado para celebrar nossas raízes. A estampa ganha ainda mais personalidade com o bordado artesanal, feito para valorizar o trabalho manual e tornar cada bolsa especial.",
+    ],
+    features: [
+      "Fechamento com zíper",
+      "Bolso externo com zíper",
+      "1 bolso interno com zíper",
+      "2 bolsos internos de acesso rápido",
+      "Porta-chaves interno",
+    ],
+    material: "Veludo",
+    dimensions: "Tamanho: A 28 x L 40 x P 12 cm.",
+    price: 308,
+    pixPrice: 280,
+    images: imageList("max-bag-revoada-dos-guaras", 5, "jpeg"),
+  },
 ];

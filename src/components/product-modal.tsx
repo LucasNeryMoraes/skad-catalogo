@@ -250,13 +250,14 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <aside className="pointer-events-none absolute inset-x-0 bottom-0 z-10 bg-gradient-to-t from-black/88 via-black/55 to-transparent px-3 pb-3 pt-24 text-white lg:pointer-events-auto lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
+        <aside className="pointer-events-auto absolute inset-x-0 bottom-0 z-10 max-h-[62svh] overflow-y-auto bg-gradient-to-t from-black/88 via-black/55 to-transparent px-3 pb-3 pt-24 text-white lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:max-h-none lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
           <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-[#C8A45D]/70 hover:text-[#9a7739] lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
           <div className="pointer-events-auto pr-16 lg:pr-0">
             <div className="hidden h-px w-14 bg-[#C8A45D] lg:mb-8 lg:block" />
+            {product.collection && <p className="mb-3 text-[.62rem] font-bold uppercase tracking-[.22em] text-[#C8A45D] lg:text-[#9a7739]">{product.collection}</p>}
             <h2 className="display text-[1.75rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
             {product.description && (
               <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
@@ -265,7 +266,7 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
             )}
             <div className="mt-4 grid max-w-[18rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:bg-[#171714] lg:text-[#fff7e7]">
               <div className="border-r border-[#C8A45D]/35 px-4 py-3">
-                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#9a7739]">Valor</span>
+                <span className="block text-[.62rem] font-bold uppercase tracking-[.18em] text-[#9a7739]">Cartão</span>
                 <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.price)}</strong>
               </div>
               <div className="px-4 py-3">
@@ -273,6 +274,27 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
                 <strong className="mt-1 block text-base font-semibold">{formatCurrency(product.pixPrice)}</strong>
               </div>
             </div>
+            {product.details && (
+              <div className="mt-5 space-y-3 rounded-3xl border border-white/15 bg-black/20 p-4 text-sm leading-6 text-white/86 backdrop-blur lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
+                {product.material && (
+                  <p className="text-[.68rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[#9a7739]">Material: {product.material}</p>
+                )}
+                {product.details.map((detail) => (
+                  <p key={detail}>{detail}</p>
+                ))}
+                {product.dimensions && <p className="font-semibold text-white lg:text-[#171714]">{product.dimensions}</p>}
+                {product.features && (
+                  <ul className="space-y-1.5 pt-1">
+                    {product.features.map((feature) => (
+                      <li key={feature} className="flex gap-2">
+                        <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-[#C8A45D]" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
             <p className="mt-5 hidden text-[.95rem] leading-7 text-black/65 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
           </div>
 

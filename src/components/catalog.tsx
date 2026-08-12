@@ -130,7 +130,7 @@ export function Catalog({ products }: { products: Product[] }) {
                     {product.description && <p className="mt-3 text-base leading-6 text-black/55 md:text-sm md:leading-5">{product.description}</p>}
                     <div className="mt-4 flex flex-wrap items-center gap-2.5">
                       <span className="rounded-full border border-black/10 bg-white/70 px-3.5 py-2 text-sm font-semibold text-[#171714] shadow-sm md:text-xs">
-                        Valor {formatCurrency(product.price)}
+                        Cartão {formatCurrency(product.price)}
                       </span>
                       <span className="rounded-full bg-[#171714] px-3.5 py-2 text-sm font-bold text-[#fff7e7] shadow-sm md:text-xs">
                         Pix {formatCurrency(product.pixPrice)}
