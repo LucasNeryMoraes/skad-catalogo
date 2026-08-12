@@ -250,17 +250,17 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <aside className="pointer-events-auto relative z-10 shrink-0 border-t border-white/10 bg-black px-3 pb-[calc(.75rem+env(safe-area-inset-bottom))] pt-3 text-white lg:static lg:col-start-2 lg:row-start-1 lg:flex lg:max-h-none lg:min-h-[150px] lg:flex-col lg:justify-between lg:border-l lg:border-t-0 lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
+        <aside className="pointer-events-auto relative z-10 flex max-h-[46svh] shrink-0 flex-col overflow-hidden border-t border-white/10 bg-black px-3 pb-[calc(.75rem+env(safe-area-inset-bottom))] pt-3 text-white lg:static lg:col-start-2 lg:row-start-1 lg:max-h-none lg:min-h-[150px] lg:overflow-y-auto lg:border-l lg:border-t-0 lg:border-[#C8A45D]/25 lg:bg-[#fbf7ef] lg:bg-none lg:p-8 lg:text-[#171714] lg:shadow-[-28px_0_70px_rgba(23,23,20,.08)]">
           <button onClick={onClose} className="hidden h-10 w-10 items-center justify-center self-end rounded-full border border-black/10 bg-white text-black shadow-sm transition hover:border-[#C8A45D]/70 hover:text-[#9a7739] lg:flex" aria-label="Fechar">
             <CloseIcon className="h-5 w-5" />
           </button>
 
-          <div className="pointer-events-auto pr-16 lg:pr-0">
+          <div className="pointer-events-auto min-h-0 overflow-y-auto pr-16 lg:overflow-visible lg:pr-0">
             <div className="hidden h-px w-14 bg-[#C8A45D] lg:mb-8 lg:block" />
             {product.collection && <p className="mb-1.5 text-[.58rem] font-bold uppercase tracking-[.22em] text-[#C8A45D] lg:mb-3 lg:text-[.62rem] lg:text-[#9a7739]">{product.collection}</p>}
             <h2 className="display line-clamp-2 text-[1.25rem] font-medium leading-[1.02] text-white drop-shadow-sm lg:line-clamp-none lg:text-[2.35rem] lg:text-[#171714] lg:drop-shadow-none">{product.name}</h2>
             {product.description && (
-              <p className="mt-3 hidden max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:inline-flex lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
+              <p className="mt-3 inline-flex max-w-full rounded-full border border-[#C8A45D]/70 bg-[#120f0a]/95 px-4 py-2.5 text-[.68rem] font-semibold uppercase leading-[1.35] tracking-[.1em] text-[#fff7e7] shadow-[0_14px_35px_rgba(0,0,0,.26)] backdrop-blur lg:mt-5 lg:bg-[#171714] lg:px-5 lg:py-3 lg:text-[.74rem] lg:tracking-[.11em]">
                 {product.description}
               </p>
             )}
@@ -275,7 +275,7 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
               </div>
             </div>
             {product.details && (
-              <div className="mt-5 hidden space-y-3 rounded-3xl border border-white/15 bg-black/20 p-4 text-sm leading-6 text-white/86 backdrop-blur lg:block lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
+              <div className="mt-4 space-y-3 rounded-3xl border border-white/15 bg-white/[.06] p-4 text-sm leading-6 text-white/86 backdrop-blur lg:mt-5 lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
                 {product.material && (
                   <p className="text-[.68rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[#9a7739]">Material: {product.material}</p>
                 )}
@@ -298,7 +298,7 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
             <p className="mt-5 hidden text-[.95rem] leading-7 text-black/65 lg:block">Conheça cada detalhe desta peça SKAD. Fale conosco para consultar cores e disponibilidade.</p>
           </div>
 
-          <div className="pointer-events-auto mt-3 flex items-center justify-between border-t border-white/15 pt-3 lg:mt-6 lg:border-[#C8A45D]/30 lg:pt-5">
+          <div className="pointer-events-auto mt-3 flex shrink-0 items-center justify-between border-t border-white/15 bg-black pt-3 lg:mt-6 lg:bg-transparent lg:border-[#C8A45D]/30 lg:pt-5">
             <span className="text-xs tracking-[.2em] text-white/70 lg:font-semibold lg:text-[#9a7739]">
               {String(index + 1).padStart(2, "0")} / {String(product.images.length).padStart(2, "0")}
             </span>
