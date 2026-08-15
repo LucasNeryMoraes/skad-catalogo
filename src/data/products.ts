@@ -17,6 +17,9 @@ export type Product = {
 const imageList = (folder: string, count: number, extension = "jpg") =>
   Array.from({ length: count }, (_, index) => `/products/${folder}/${index + 1}.${extension}`);
 
+const imageRange = (folder: string, start: number, end: number, extension = "jpg") =>
+  Array.from({ length: end - start + 1 }, (_, index) => `/products/${folder}/${start + index}.${extension}`);
+
 export const products: Product[] = [
   { id: "estojo-palito", name: "Estojo Palito", category: "Estojos", price: 45, pixPrice: 40, images: imageList("estojo-palito", 2) },
   { id: "necessaire-basic", name: "Necessaire Basic", category: "Necessaires", price: 55, pixPrice: 50, images: imageList("necessaire-basic", 2) },
@@ -100,17 +103,16 @@ export const products: Product[] = [
     images: imageList("max-bag-revoada-dos-guaras", 5, "jpeg"),
   },
   {
-    id: "bag-bella",
-    name: "Bag Bella",
+    id: "bag-bella-clara-flor-preta",
+    name: "Bag Bella - Clara com Flor Preta",
     category: "Bolsas",
     subcategory: "Bag Bella",
     collection: "Bag Bella",
-    description: "Flor em crochê artesanal • PVC sintético • 23 x 33 x 10 cm.",
+    description: "Bolsa artesanal • Flor em crochê • PVC sintético • 23 x 33 x 10 cm.",
     details: [
       "Um encontro entre delicadeza, funcionalidade e o fazer artesanal.",
-      "O grande destaque da Bag Bella é a flor em crochê, feita à mão e aplicada cuidadosamente à bolsa, trazendo textura, personalidade e aquele toque especial que transforma cada peça em única.",
-      "Confeccionada artesanalmente em material sintético à base de PVC, a Bag Bella foi pensada para acompanhar a rotina com praticidade e estilo.",
-      "A Bag Bella é para quem valoriza o detalhe, o artesanal e uma bolsa que carrega muito mais do que objetos: carrega identidade.",
+      "A Bag Bella é confeccionada artesanalmente em material sintético à base de PVC. Seu grande destaque é a flor em crochê, feita à mão e aplicada cuidadosamente à bolsa, trazendo textura, personalidade e aquele toque especial que transforma cada peça em única.",
+      "Pensada para acompanhar a rotina com praticidade e estilo, ela valoriza o detalhe, o artesanal e uma bolsa que carrega muito mais do que objetos: carrega identidade.",
       "SKAD — regionalidade é raiz, o artesanato é memória.",
     ],
     features: [
@@ -124,6 +126,32 @@ export const products: Product[] = [
     dimensions: "Tamanho: A 23 cm | L 33 cm | P 10 cm.",
     price: 245,
     pixPrice: 230,
-    images: imageList("bag-bella", 12),
+    images: imageRange("bag-bella", 1, 6),
+  },
+  {
+    id: "bag-bella-natural-flor-vinho",
+    name: "Bag Bella - Natural com Flor Vinho",
+    category: "Bolsas",
+    subcategory: "Bag Bella",
+    collection: "Bag Bella",
+    description: "Bolsa artesanal • Flor em crochê • PVC sintético • 23 x 33 x 10 cm.",
+    details: [
+      "Um encontro entre delicadeza, funcionalidade e o fazer artesanal.",
+      "A Bag Bella é confeccionada artesanalmente em material sintético à base de PVC. Seu grande destaque é a flor em crochê, feita à mão e aplicada cuidadosamente à bolsa, trazendo textura, personalidade e aquele toque especial que transforma cada peça em única.",
+      "Pensada para acompanhar a rotina com praticidade e estilo, ela valoriza o detalhe, o artesanal e uma bolsa que carrega muito mais do que objetos: carrega identidade.",
+      "SKAD — regionalidade é raiz, o artesanato é memória.",
+    ],
+    features: [
+      "Alça regulável com fivela",
+      "Bolso externo com zíper",
+      "Parte interna com 1 bolso com zíper + 2 bolsos de acesso rápido",
+      "Fechamento principal com zíper",
+      "Flor em crochê feita artesanalmente",
+    ],
+    material: "Material sintético à base de PVC",
+    dimensions: "Tamanho: A 23 cm | L 33 cm | P 10 cm.",
+    price: 245,
+    pixPrice: 230,
+    images: imageRange("bag-bella", 7, 12),
   },
 ];
