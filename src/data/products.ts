@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag" | "Max Bag";
+  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella";
   description?: string;
   collection?: string;
   details?: string[];
@@ -98,5 +98,32 @@ export const products: Product[] = [
     price: 308,
     pixPrice: 280,
     images: imageList("max-bag-revoada-dos-guaras", 5, "jpeg"),
+  },
+  {
+    id: "bag-bella",
+    name: "Bag Bella",
+    category: "Bolsas",
+    subcategory: "Bag Bella",
+    collection: "Bag Bella",
+    description: "Flor em crochê artesanal • PVC sintético • 23 x 33 x 10 cm.",
+    details: [
+      "Um encontro entre delicadeza, funcionalidade e o fazer artesanal.",
+      "O grande destaque da Bag Bella é a flor em crochê, feita à mão e aplicada cuidadosamente à bolsa, trazendo textura, personalidade e aquele toque especial que transforma cada peça em única.",
+      "Confeccionada artesanalmente em material sintético à base de PVC, a Bag Bella foi pensada para acompanhar a rotina com praticidade e estilo.",
+      "A Bag Bella é para quem valoriza o detalhe, o artesanal e uma bolsa que carrega muito mais do que objetos: carrega identidade.",
+      "SKAD — regionalidade é raiz, o artesanato é memória.",
+    ],
+    features: [
+      "Alça regulável com fivela",
+      "Bolso externo com zíper",
+      "Parte interna com 1 bolso com zíper + 2 bolsos de acesso rápido",
+      "Fechamento principal com zíper",
+      "Flor em crochê feita artesanalmente",
+    ],
+    material: "Material sintético à base de PVC",
+    dimensions: "Tamanho: A 23 cm | L 33 cm | P 10 cm.",
+    price: 245,
+    pixPrice: 230,
+    images: imageList("bag-bella", 12),
   },
 ];
