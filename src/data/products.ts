@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella";
+  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo";
   description?: string;
   collection?: string;
   details?: string[];
@@ -108,6 +108,33 @@ export const products: Product[] = [
     price: 308,
     pixPrice: 280,
     images: imageList("max-bag-revoada-dos-guaras", 5, "jpeg"),
+  },
+  {
+    id: "bag-hobo-urban-com-franjas",
+    name: "Bag Hobo Urban com Franjas",
+    category: "Bolsas",
+    subcategory: "Bag Hobo",
+    collection: "Detalhes que Encantam",
+    description: "Design boho • Franjas • PVC sintético • 26 x 41 x 1 cm.",
+    details: [
+      "A Bolsa Hobo Urban é a união perfeita de design arrojado e funcionalidade.",
+      "Feita em material sintético à base de PVC de alta durabilidade e textura sutil, esta bolsa de ombro é um convite ao estilo.",
+      "O formato arredondado é emoldurado por franjas que dão movimento e um toque rústico-chique.",
+      "Leve a sua e adicione um toque de sofisticação e atitude a qualquer look.",
+    ],
+    features: [
+      "Design boho com formato arredondado e franjas",
+      "Fechamento principal em zíper",
+      "Bolso externo com zíper para celular ou chaves",
+      "Forro de alta qualidade",
+      "2 bolsos abertos de acesso rápido",
+      "1 bolso com zíper para itens pessoais",
+    ],
+    material: "Sintético à base de PVC",
+    dimensions: "Dimensões: A 26cm x L 41cm x P 1cm.",
+    price: 270,
+    pixPrice: 250,
+    images: imageList("bag-hobo-urban", 4),
   },
   {
     id: "bag-bella-clara-flor-preta",
