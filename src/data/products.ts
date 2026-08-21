@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo";
+  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo" | "Bag Hexa";
   description?: string;
   collection?: string;
   details?: string[];
@@ -135,6 +135,31 @@ export const products: Product[] = [
     price: 270,
     pixPrice: 250,
     images: imageList("bag-hobo-urban", 4),
+  },
+  {
+    id: "bag-hexa",
+    name: "Bag Hexa",
+    category: "Bolsas",
+    subcategory: "Bag Hexa",
+    collection: "Bag Hexa",
+    description: "Jacquard • PVC sintético • 21 x 32 x 13,5 cm.",
+    details: [
+      "Elegância, personalidade e funcionalidade em uma só peça.",
+      "A Bag Hexa combina a textura sofisticada do tecido jacquard com o acabamento do sintético à base de PVC, criando um modelo marcante e versátil — daqueles que transformam o look.",
+      "Além do design, ela foi pensada para facilitar a sua rotina.",
+      "Uma peça artesanal e feita para quem valoriza detalhes.",
+    ],
+    features: [
+      "2 bolsos internos de acesso rápido",
+      "1 bolso interno com zíper",
+      "Fechamento seguro",
+      "Amplo espaço para acomodar seus essenciais",
+    ],
+    material: "Tecido jacquard com acabamento em sintético à base de PVC",
+    dimensions: "Dimensões: A 21cm x L 32cm x P 13,5cm.",
+    price: 265,
+    pixPrice: 250,
+    images: imageList("bag-hexa", 5),
   },
   {
     id: "bag-bella-clara-flor-preta",
