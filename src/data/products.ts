@@ -138,7 +138,7 @@ export const products: Product[] = [
     category: "Bolsas",
     subcategory: "Max Bag",
     collection: "Max Bag",
-    description: "Tecido • 28 x 40 x 12 cm.",
+    description: "Max Bag • Tecido • 28 x 40 x 12 cm.",
     material: "Tecido",
     dimensions: "Tamanho: A 28 x L 40 x P 12 cm.",
     price: 230,
