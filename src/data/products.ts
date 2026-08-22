@@ -2,7 +2,7 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo" | "Bag Hexa";
+  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo" | "Bag Hexa" | "Bolsa Baguete";
   description?: string;
   collection?: string;
   details?: string[];
@@ -220,6 +220,31 @@ export const products: Product[] = [
     price: 265,
     pixPrice: 250,
     images: imageList("bag-hexa", 5),
+  },
+  {
+    id: "bolsa-baguete-alongada",
+    name: "Bolsa Baguete Alongada",
+    category: "Bolsas",
+    subcategory: "Bolsa Baguete",
+    collection: "Bolsa Baguete",
+    description: "Tecido rústico • Flor em crochê • 31 x 18 x 10,5 cm.",
+    details: [
+      "Elegância e autenticidade em cada detalhe.",
+      "Produzida artesanalmente em tecido rústico de alta qualidade, ela é o toque de sofisticação que faltava no seu visual.",
+      "O grande destaque fica por conta da delicada flor em crochê feita à mão, que traz um charme único e exclusivo para a peça.",
+      "Possui bolso externo traseiro com zíper e compartimentos internos para manter tudo organizado.",
+      "Garanta a sua! Entre em contato via WhatsApp.",
+    ],
+    features: [
+      "Flor em crochê feita à mão",
+      "Bolso externo traseiro com zíper",
+      "Compartimentos internos",
+    ],
+    material: "Tecido rústico",
+    dimensions: "Tamanho: 31cm x 18cm x 10,5cm.",
+    price: 198,
+    pixPrice: 180,
+    images: imageList("bolsa-baguete-alongada", 6),
   },
   {
     id: "bag-bella-clara-flor-preta",
