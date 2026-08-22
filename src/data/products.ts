@@ -134,7 +134,7 @@ export const products: Product[] = [
   },
   {
     id: "max-bag-tecido",
-    name: "MAX BAG",
+    name: "MAX BAG - Verde",
     category: "Bolsas",
     subcategory: "Max Bag",
     collection: "Max Bag",
