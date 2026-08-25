@@ -106,7 +106,7 @@ export function Catalog({ products }: { products: Product[] }) {
               <button
                 key={item}
                 onClick={() => setSubcategory(item)}
-                className={`min-h-11 whitespace-nowrap rounded-full border px-5 py-3 text-[.64rem] font-bold uppercase tracking-[.16em] transition-all md:min-h-0 md:py-2 ${
+                className={`flex min-h-14 max-w-[16rem] items-center justify-center whitespace-normal rounded-2xl border px-4 py-3 text-center text-[.64rem] font-bold uppercase leading-snug tracking-[.14em] transition-all md:min-h-12 md:max-w-[18rem] md:rounded-full md:px-5 md:py-2 ${
                   subcategory === item ? "border-[#9a7739] bg-[#9a7739] text-white" : "border-black/15 bg-white/45 hover:border-[#9a7739]"
                 }`}
               >
