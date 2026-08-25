@@ -24,3 +24,27 @@ model AdminUser {
 
   @@index([role, active])
 }
+
+model ProductCost {
+  id            String         @id @default(cuid())
+  productId     String         @unique
+  marginPercent Decimal        @default(0) @db.Decimal(10, 2)
+  materials     CostMaterial[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
+model CostMaterial {
+  id            String      @id @default(cuid())
+  productCostId String
+  productCost   ProductCost @relation(fields: [productCostId], references: [id], onDelete: Cascade)
+  name          String
+  unit          String
+  quantity      Decimal     @default(0) @db.Decimal(12, 3)
+  unitPrice     Decimal     @default(0) @db.Decimal(12, 2)
+  sortOrder     Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([productCostId, sortOrder])
+}
