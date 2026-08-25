@@ -13,9 +13,9 @@ const formatCurrency = (value: number) =>
   });
 
 const preferredSubcategoryOrder = [
-  "Porta-Garrafa de até 1,2L com Bordado",
-  "Porta-Garrafa de até 1,2L Pintado à Mão",
-  "Porta-Garrafa de até 1,2L",
+  "Bordado",
+  "Pintado à Mão",
+  "Lisos",
 ];
 
 export function Catalog({ products }: { products: Product[] }) {
