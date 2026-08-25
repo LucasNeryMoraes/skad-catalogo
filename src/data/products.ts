@@ -2,7 +2,16 @@ export type Product = {
   id: string;
   name: string;
   category: "Estojos" | "Necessaires" | "Lancheiras" | "Acessórios" | "Bolsas";
-  subcategory?: "Shoulder Bag" | "Max Bag" | "Bag Bella" | "Bag Hobo" | "Bag Hexa" | "Bolsa Baguete";
+  subcategory?:
+    | "Shoulder Bag"
+    | "Max Bag"
+    | "Bag Bella"
+    | "Bag Hobo"
+    | "Bag Hexa"
+    | "Bolsa Baguete"
+    | "Porta-Garrafa de até 1,2L com Bordado"
+    | "Porta-Garrafa de até 1,2L Pintado à Mão"
+    | "Porta-Garrafa de até 1,2L";
   description?: string;
   collection?: string;
   details?: string[];
@@ -43,18 +52,18 @@ export const products: Product[] = [
   { id: "necessaire-sara-listrada-preta", name: "Necessaire Sara - Listrada Preta", category: "Necessaires", description: "Dimensões: 20cm x 12cm x 9cm.", price: 75, pixPrice: 69, images: imageList("necessaire-sara-cor-6", 2) },
   { id: "necessaire-sara-caramelo-matelasse", name: "Necessaire Sara - Caramelo Matelassê", category: "Necessaires", description: "Dimensões: 20cm x 12cm x 9cm.", price: 75, pixPrice: 69, images: imageList("necessaire-sara-cor-7", 1) },
   { id: "lancheira-termica-2-compartimentos", name: "Lancheira Térmica com 2 Compartimentos", category: "Lancheiras", price: 195, pixPrice: 180, images: imageList("lancheira-termica-2-compartimentos", 5) },
-  { id: "porta-garrafa-guaras-pintado", name: "Porta-Garrafa Pintado à Mão - Revoada dos Guarás", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-guaras-pintado", 2) },
-  { id: "porta-garrafa-borboleta-verde-pintado", name: "Porta-Garrafa Pintado à Mão - Borboleta Verde", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-borboleta-verde-pintado", 2) },
-  { id: "porta-garrafa-borboleta-caramelo-pintado", name: "Porta-Garrafa Pintado à Mão - Borboleta Caramelo", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-borboleta-caramelo-pintado", 1) },
-  { id: "porta-garrafa-listrado", name: "Porta-Garrafa Listrado", category: "Acessórios", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-listrado", 1) },
-  { id: "porta-garrafa-pinguim-caramelo", name: "Porta-Garrafa Pintado à Mão - Capivara", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-pinguim-caramelo", 2) },
-  { id: "porta-garrafa-ipe-caramelo-pintado", name: "Porta-Garrafa Pintado à Mão - Ipê Caramelo", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-ipe-caramelo-pintado", 2) },
-  { id: "porta-garrafa-azul-liso", name: "Porta-Garrafa Azul Liso", category: "Acessórios", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-azul-liso", 1) },
-  { id: "porta-garrafa-marrom-liso", name: "Porta-Garrafa Marrom Liso", category: "Acessórios", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-marrom-liso", 1) },
-  { id: "porta-garrafa-ipe-verde-pintado", name: "Porta-Garrafa Pintado à Mão - Ipê Verde", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-ipe-verde-pintado", 1) },
-  { id: "porta-garrafa-caju-pintado", name: "Porta-Garrafa Pintado à Mão - Caju", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-caju-pintado", 1) },
-  { id: "porta-garrafa-gansos-pintado", name: "Porta-Garrafa Pintado à Mão - Gansos", category: "Acessórios", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-gansos-pintado", 1) },
-  { id: "porta-garrafa-12l-com-bordado", name: "Porta-Garrafa de até 1,2L com Bordado", category: "Acessórios", description: "Com bordado • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-12l-com-bordado", 5) },
+  { id: "porta-garrafa-guaras-pintado", name: "Porta-Garrafa Pintado à Mão - Revoada dos Guarás", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-guaras-pintado", 2) },
+  { id: "porta-garrafa-borboleta-verde-pintado", name: "Porta-Garrafa Pintado à Mão - Borboleta Verde", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-borboleta-verde-pintado", 2) },
+  { id: "porta-garrafa-borboleta-caramelo-pintado", name: "Porta-Garrafa Pintado à Mão - Borboleta Caramelo", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-borboleta-caramelo-pintado", 1) },
+  { id: "porta-garrafa-listrado", name: "Porta-Garrafa Listrado", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-listrado", 1) },
+  { id: "porta-garrafa-pinguim-caramelo", name: "Porta-Garrafa Pintado à Mão - Capivara", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-pinguim-caramelo", 2) },
+  { id: "porta-garrafa-ipe-caramelo-pintado", name: "Porta-Garrafa Pintado à Mão - Ipê Caramelo", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-ipe-caramelo-pintado", 2) },
+  { id: "porta-garrafa-azul-liso", name: "Porta-Garrafa Azul Liso", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-azul-liso", 1) },
+  { id: "porta-garrafa-marrom-liso", name: "Porta-Garrafa Marrom Liso", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L", description: "Sem pintura • Para garrafas de até 1,2 L.", price: 125, pixPrice: 110, images: imageList("porta-garrafa-marrom-liso", 1) },
+  { id: "porta-garrafa-ipe-verde-pintado", name: "Porta-Garrafa Pintado à Mão - Ipê Verde", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-ipe-verde-pintado", 1) },
+  { id: "porta-garrafa-caju-pintado", name: "Porta-Garrafa Pintado à Mão - Caju", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-caju-pintado", 1) },
+  { id: "porta-garrafa-gansos-pintado", name: "Porta-Garrafa Pintado à Mão - Gansos", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L Pintado à Mão", description: "Pintado à mão • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-gansos-pintado", 1) },
+  { id: "porta-garrafa-12l-com-bordado", name: "Porta-Garrafa de até 1,2L com Bordado", category: "Acessórios", subcategory: "Porta-Garrafa de até 1,2L com Bordado", description: "Com bordado • Para garrafas de até 1,2 L.", price: 135, pixPrice: 125, images: imageList("porta-garrafa-12l-com-bordado", 5) },
   { id: "shoulder-bag-bordada-pedrarias", name: "Shoulder Bag Bordada com Pedrarias", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", price: 135, pixPrice: 125, images: imageList("shoulder-bag-bordada-pedrarias", 3) },
   { id: "shoulder-bag-bordada-micangas", name: "Shoulder Bag Bordada com Miçangas", category: "Bolsas", subcategory: "Shoulder Bag", description: "Tamanho: C- 15cm, A- 19,5cm e L- 5,5cm.", price: 135, pixPrice: 125, images: imageList("shoulder-bag-bordada-micangas", 4) },
   {

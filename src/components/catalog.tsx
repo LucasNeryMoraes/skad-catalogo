@@ -12,6 +12,12 @@ const formatCurrency = (value: number) =>
     currency: "BRL",
   });
 
+const preferredSubcategoryOrder = [
+  "Porta-Garrafa de até 1,2L com Bordado",
+  "Porta-Garrafa de até 1,2L Pintado à Mão",
+  "Porta-Garrafa de até 1,2L",
+];
+
 export function Catalog({ products }: { products: Product[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Todos");
@@ -20,20 +26,29 @@ export function Catalog({ products }: { products: Product[] }) {
   const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.category)))];
   const subcategories = useMemo(
     () =>
-      category === "Bolsas"
-        ? Array.from(new Set(products.filter((p) => p.category === "Bolsas" && p.subcategory).map((p) => p.subcategory!)))
+      category !== "Todos"
+        ? Array.from(new Set(products.filter((p) => p.category === category && p.subcategory).map((p) => p.subcategory!))).sort(
+            (a, b) => {
+              const orderA = preferredSubcategoryOrder.indexOf(a);
+              const orderB = preferredSubcategoryOrder.indexOf(b);
+              if (orderA !== -1 || orderB !== -1) {
+                return (orderA === -1 ? Number.MAX_SAFE_INTEGER : orderA) - (orderB === -1 ? Number.MAX_SAFE_INTEGER : orderB);
+              }
+              return a.localeCompare(b, "pt-BR");
+            },
+          )
         : [],
     [products, category],
   );
   const visible = useMemo(
     () =>
       products.filter(
-        (p) =>
+          (p) =>
           (category === "Todos" || p.category === category) &&
-          (category !== "Bolsas" || subcategory === "Todos" || p.subcategory === subcategory) &&
+          (subcategories.length === 0 || subcategory === "Todos" || p.subcategory === subcategory) &&
           p.name.toLocaleLowerCase("pt-BR").includes(query.trim().toLocaleLowerCase("pt-BR")),
       ),
-    [products, category, subcategory, query],
+    [products, category, subcategory, subcategories.length, query],
   );
   const selectCategory = (item: string) => {
     setCategory(item);
@@ -85,7 +100,7 @@ export function Catalog({ products }: { products: Product[] }) {
         {subcategories.length > 0 && (
           <div
             className="no-scrollbar -mt-3 mb-6 -mx-2 flex gap-2 overflow-x-auto px-2 pb-2 sm:-mx-4 sm:px-4 md:mx-0 md:mb-8 md:px-0"
-            aria-label="Tipos de bolsas"
+            aria-label="Tipos de produtos"
           >
             {["Todos", ...subcategories].map((item) => (
               <button
