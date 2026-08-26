@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { LoginForm } from "@/components/admin/login-form";
@@ -37,7 +38,15 @@ export default async function AdminLoginPage() {
           </div>
 
           <div className="p-7 sm:p-10">
-            <p className="text-3xl font-semibold tracking-[.35em] md:hidden">SKAD</p>
+            <div className="flex items-center justify-between gap-4">
+              <p className="text-3xl font-semibold tracking-[.35em] md:hidden">SKAD</p>
+              <Link
+                href="/#catalogo"
+                className="ml-auto rounded-full border border-black/10 px-4 py-2 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-ink transition hover:border-gold hover:bg-gold hover:text-white"
+              >
+                Voltar ao catálogo
+              </Link>
+            </div>
             <p className="eyebrow mt-8 text-gold md:mt-0">Login seguro</p>
             <h2 className="display mt-3 text-4xl leading-tight sm:text-5xl">
               Entrar no admin
