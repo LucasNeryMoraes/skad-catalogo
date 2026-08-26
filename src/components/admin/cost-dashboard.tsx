@@ -271,7 +271,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
       </aside>
 
       <section className="min-w-0 rounded-[1.5rem] border border-black/10 bg-white p-3 shadow-xl shadow-black/5 sm:rounded-[1.75rem] sm:p-6">
-        <div className="grid gap-5 border-b border-black/10 pb-5 2xl:grid-cols-[minmax(18rem,1fr)_minmax(36rem,auto)] 2xl:items-start">
+        <div className="grid min-w-0 gap-5 border-b border-black/10 pb-5">
           <div className="flex min-w-0 gap-4">
             {selectedProduct ? (
               <span className="relative hidden h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-cream sm:block">
@@ -293,7 +293,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
             </div>
           </div>
 
-          <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <SummaryCard label="Custo" value={currency.format(materialTotal)} />
             <SummaryCard label={`Lucro ${percent.format(toNumber(marginPercent))}%`} value={currency.format(profitValue)} />
             <SummaryCard label="Preço Pix" value={saleCurrency.format(pixPrice)} highlight />
@@ -513,7 +513,7 @@ function SummaryCard({
   highlight?: boolean;
 }) {
   return (
-    <article className={`min-w-0 rounded-2xl border p-4 ${highlight ? "border-gold bg-ink text-white" : "border-black/10 bg-cream"}`}>
+    <article className={`min-w-0 rounded-2xl border p-4 shadow-sm ${highlight ? "border-gold bg-ink text-white" : "border-black/10 bg-cream"}`}>
       <p className={`truncate text-[.62rem] font-bold uppercase tracking-[.14em] ${highlight ? "text-gold" : "text-neutral-500"}`}>
         {label}
       </p>
