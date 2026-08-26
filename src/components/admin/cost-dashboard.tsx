@@ -29,6 +29,8 @@ type CostResponse = {
 const currency = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
 });
 
 const percent = new Intl.NumberFormat("pt-BR", {
