@@ -271,8 +271,8 @@ export function CostDashboard({ products }: { products: Product[] }) {
       </aside>
 
       <section className="min-w-0 rounded-[1.5rem] border border-black/10 bg-white p-3 shadow-xl shadow-black/5 sm:rounded-[1.75rem] sm:p-6">
-        <div className="flex flex-col gap-5 border-b border-black/10 pb-5 xl:flex-row xl:items-start xl:justify-between">
-          <div className="flex gap-4">
+        <div className="grid gap-5 border-b border-black/10 pb-5 2xl:grid-cols-[minmax(18rem,1fr)_minmax(36rem,auto)] 2xl:items-start">
+          <div className="flex min-w-0 gap-4">
             {selectedProduct ? (
               <span className="relative hidden h-24 w-24 shrink-0 overflow-hidden rounded-2xl bg-cream sm:block">
                 <Image
@@ -284,20 +284,25 @@ export function CostDashboard({ products }: { products: Product[] }) {
                 />
               </span>
             ) : null}
-            <div>
+            <div className="min-w-0">
               <p className="eyebrow text-gold">Custos de produção</p>
-              <h1 className="display mt-2 text-4xl leading-none">{selectedProduct?.name}</h1>
-              <p className="mt-3 text-sm text-neutral-500">
+              <h1 className="display mt-2 text-3xl leading-tight sm:text-4xl">{selectedProduct?.name}</h1>
+              <p className="mt-3 max-w-md text-sm leading-6 text-neutral-500">
                 Edite materiais, quantidades, preços unitários e margem deste produto.
               </p>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 xl:min-w-[38rem] xl:grid-cols-4">
-            <SummaryCard label="Material" value={currency.format(materialTotal)} />
+          <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <SummaryCard label="Custo" value={currency.format(materialTotal)} />
             <SummaryCard label={`Lucro ${percent.format(toNumber(marginPercent))}%`} value={currency.format(profitValue)} />
             <SummaryCard label="Preço Pix" value={saleCurrency.format(pixPrice)} highlight />
-            <SummaryCard label={`Preço Cartão ${percent.format(toNumber(machinePercent))}%`} value={saleCurrency.format(cardPrice)} highlight />
+            <SummaryCard
+              label="Preço Cartão"
+              value={saleCurrency.format(cardPrice)}
+              note={`${percent.format(toNumber(machinePercent))}% maquininha`}
+              highlight
+            />
           </div>
         </div>
 
@@ -499,18 +504,25 @@ export function CostDashboard({ products }: { products: Product[] }) {
 function SummaryCard({
   label,
   value,
+  note,
   highlight = false,
 }: {
   label: string;
   value: string;
+  note?: string;
   highlight?: boolean;
 }) {
   return (
-    <article className={`rounded-2xl border p-4 ${highlight ? "border-gold bg-ink text-white" : "border-black/10 bg-cream"}`}>
-      <p className={`text-[.62rem] font-bold uppercase tracking-[.16em] ${highlight ? "text-gold" : "text-neutral-500"}`}>
+    <article className={`min-w-0 rounded-2xl border p-4 ${highlight ? "border-gold bg-ink text-white" : "border-black/10 bg-cream"}`}>
+      <p className={`truncate text-[.62rem] font-bold uppercase tracking-[.14em] ${highlight ? "text-gold" : "text-neutral-500"}`}>
         {label}
       </p>
-      <p className="mt-2 text-lg font-bold">{value}</p>
+      {note ? (
+        <p className={`mt-1 truncate text-[.6rem] font-bold uppercase tracking-[.12em] ${highlight ? "text-white/55" : "text-neutral-400"}`}>
+          {note}
+        </p>
+      ) : null}
+      <p className="mt-2 whitespace-nowrap text-lg font-bold">{value}</p>
     </article>
   );
 }
