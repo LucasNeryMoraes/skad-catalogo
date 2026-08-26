@@ -13,6 +13,7 @@ export type Product = {
     | "Bordado"
     | "Pintado à Mão"
     | "Lisos";
+  crossbodyStyle?: "Com Bordado" | "Sem Bordado";
   description?: string;
   collection?: string;
   details?: string[];
@@ -293,10 +294,11 @@ export const products: Product[] = [
     name: "Crossbody - Estampa Mapa do Piauí com Guará",
     category: "Bolsas",
     subcategory: "Crossbody",
+    crossbodyStyle: "Com Bordado",
     collection: "Crossbody",
-    description: "Tecido • 21 x 15 x 7 cm.",
+    description: "Tecido • Com bordado • 21 x 15 x 7 cm.",
     details: [
-      "Crossbody com estampa do mapa do Piauí com Guará.",
+      "Crossbody com estampa do mapa do Piauí com Guará e detalhe em bordado.",
       "Uma peça prática para carregar o essencial com identidade regional SKAD.",
     ],
     material: "Tecido",

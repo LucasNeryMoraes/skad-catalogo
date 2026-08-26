@@ -18,10 +18,16 @@ const preferredSubcategoryOrder = [
   "Lisos",
 ];
 
+const crossbodyStyles: NonNullable<Product["crossbodyStyle"]>[] = [
+  "Com Bordado",
+  "Sem Bordado",
+];
+
 export function Catalog({ products }: { products: Product[] }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("Todos");
   const [subcategory, setSubcategory] = useState("Todos");
+  const [crossbodyStyle, setCrossbodyStyle] = useState("Todos");
   const [selected, setSelected] = useState<Product | null>(null);
   const categories = ["Todos", ...Array.from(new Set(products.map((p) => p.category)))];
   const subcategories = useMemo(
@@ -46,13 +52,19 @@ export function Catalog({ products }: { products: Product[] }) {
           (p) =>
           (category === "Todos" || p.category === category) &&
           (subcategories.length === 0 || subcategory === "Todos" || p.subcategory === subcategory) &&
+          (subcategory !== "Crossbody" || crossbodyStyle === "Todos" || p.crossbodyStyle === crossbodyStyle) &&
           p.name.toLocaleLowerCase("pt-BR").includes(query.trim().toLocaleLowerCase("pt-BR")),
       ),
-    [products, category, subcategory, subcategories.length, query],
+    [products, category, subcategory, subcategories.length, crossbodyStyle, query],
   );
   const selectCategory = (item: string) => {
     setCategory(item);
     setSubcategory("Todos");
+    setCrossbodyStyle("Todos");
+  };
+  const selectSubcategory = (item: string) => {
+    setSubcategory(item);
+    setCrossbodyStyle("Todos");
   };
 
   return (
@@ -105,9 +117,28 @@ export function Catalog({ products }: { products: Product[] }) {
             {["Todos", ...subcategories].map((item) => (
               <button
                 key={item}
-                onClick={() => setSubcategory(item)}
+                onClick={() => selectSubcategory(item)}
                 className={`flex min-h-14 max-w-[16rem] items-center justify-center whitespace-normal rounded-2xl border px-4 py-3 text-center text-[.64rem] font-bold uppercase leading-snug tracking-[.14em] transition-all md:min-h-12 md:max-w-[18rem] md:rounded-full md:px-5 md:py-2 ${
                   subcategory === item ? "border-[#9a7739] bg-[#9a7739] text-white" : "border-black/15 bg-white/45 hover:border-[#9a7739]"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {subcategory === "Crossbody" && (
+          <div
+            className="no-scrollbar -mt-3 mb-6 -mx-2 flex gap-2 overflow-x-auto px-2 pb-2 sm:-mx-4 sm:px-4 md:mx-0 md:mb-8 md:px-0"
+            aria-label="Tipos de Crossbody"
+          >
+            {["Todos", ...crossbodyStyles].map((item) => (
+              <button
+                key={item}
+                onClick={() => setCrossbodyStyle(item)}
+                className={`flex min-h-14 items-center justify-center whitespace-nowrap rounded-2xl border px-4 py-3 text-center text-[.64rem] font-bold uppercase leading-snug tracking-[.14em] transition-all md:min-h-12 md:rounded-full md:px-5 md:py-2 ${
+                  crossbodyStyle === item ? "border-[#9a7739] bg-[#9a7739] text-white" : "border-black/15 bg-white/45 hover:border-[#9a7739]"
                 }`}
               >
                 {item}
