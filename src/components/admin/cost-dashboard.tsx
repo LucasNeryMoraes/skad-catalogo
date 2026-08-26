@@ -207,7 +207,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
   }
 
   return (
-    <div className="mt-10 grid gap-6 lg:grid-cols-[20rem_1fr]">
+    <div className="mt-8 grid min-w-0 gap-5 sm:mt-10 lg:grid-cols-[20rem_1fr] lg:gap-6">
       <aside className="rounded-[1.75rem] border border-black/10 bg-white p-4 shadow-xl shadow-black/5">
         <div className="sticky top-24">
           <label className="block">
@@ -253,7 +253,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
         </div>
       </aside>
 
-      <section className="rounded-[1.75rem] border border-black/10 bg-white p-4 shadow-xl shadow-black/5 sm:p-6">
+      <section className="min-w-0 rounded-[1.5rem] border border-black/10 bg-white p-3 shadow-xl shadow-black/5 sm:rounded-[1.75rem] sm:p-6">
         <div className="flex flex-col gap-5 border-b border-black/10 pb-5 xl:flex-row xl:items-start xl:justify-between">
           <div className="flex gap-4">
             {selectedProduct ? (
@@ -284,7 +284,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
         </div>
 
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <label className="block max-w-xs">
+          <label className="block w-full max-w-xs">
             <span className="eyebrow text-neutral-500">Margem de lucro (%)</span>
             <input
               value={marginPercent}
@@ -319,7 +319,86 @@ export function CostDashboard({ products }: { products: Product[] }) {
           </p>
         ) : null}
 
-        <div className="mt-5 overflow-x-auto rounded-2xl border border-black/10">
+        <div className="mt-5 space-y-4 md:hidden">
+          {rowsWithSubtotal.map((material, index) => (
+            <article key={material.localId} className="rounded-2xl border border-black/10 bg-cream p-4">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-bold uppercase tracking-[.18em] text-neutral-500">
+                  Material {index + 1}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => removeMaterial(material.localId)}
+                  aria-label={`Excluir material ${material.name || "sem nome"}`}
+                  className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-black/10 bg-white text-lg transition hover:border-red-300 hover:bg-red-50 hover:text-red-600"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="mt-4 grid gap-3">
+                <label className="block">
+                  <span className="text-[.65rem] font-bold uppercase tracking-[.16em] text-neutral-500">
+                    Nome do material
+                  </span>
+                  <input
+                    value={material.name}
+                    onChange={(event) => updateMaterial(material.localId, "name", event.target.value)}
+                    placeholder="Ex: Couro, zíper, linha..."
+                    className="mt-2 h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-gold"
+                  />
+                </label>
+
+                <label className="block">
+                  <span className="text-[.65rem] font-bold uppercase tracking-[.16em] text-neutral-500">
+                    Unidade de medida
+                  </span>
+                  <input
+                    value={material.unit}
+                    onChange={(event) => updateMaterial(material.localId, "unit", event.target.value)}
+                    placeholder="metro, cm, unidade..."
+                    className="mt-2 h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-gold"
+                  />
+                </label>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="block">
+                    <span className="text-[.65rem] font-bold uppercase tracking-[.16em] text-neutral-500">
+                      Quantidade
+                    </span>
+                    <input
+                      value={material.quantity}
+                      onChange={(event) => updateMaterial(material.localId, "quantity", event.target.value)}
+                      inputMode="decimal"
+                      className="mt-2 h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-gold"
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="text-[.65rem] font-bold uppercase tracking-[.16em] text-neutral-500">
+                      Preço unit.
+                    </span>
+                    <input
+                      value={material.unitPrice}
+                      onChange={(event) => updateMaterial(material.localId, "unitPrice", event.target.value)}
+                      inputMode="decimal"
+                      className="mt-2 h-12 w-full rounded-xl border border-black/10 bg-white px-3 text-base outline-none focus:border-gold"
+                    />
+                  </label>
+                </div>
+
+                <div className="rounded-xl border border-gold/30 bg-white px-4 py-3">
+                  <span className="text-[.65rem] font-bold uppercase tracking-[.16em] text-neutral-500">
+                    Subtotal
+                  </span>
+                  <p className="mt-1 text-lg font-bold text-ink">{currency.format(material.subtotal)}</p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-5 hidden overflow-x-auto rounded-2xl border border-black/10 md:block">
           <table className="min-w-[820px] w-full border-collapse text-sm">
             <thead className="bg-cream text-left text-[.65rem] uppercase tracking-[.16em] text-neutral-500">
               <tr>
