@@ -9,6 +9,7 @@ export type Product = {
     | "Bag Boho"
     | "Bag Hexa"
     | "Bolsa Baguete"
+    | "Crossbody"
     | "Bordado"
     | "Pintado à Mão"
     | "Lisos";
@@ -18,8 +19,8 @@ export type Product = {
   features?: string[];
   material?: string;
   dimensions?: string;
-  price: number;
-  pixPrice: number;
+  price?: number;
+  pixPrice?: number;
   images: string[];
 };
 
@@ -286,6 +287,21 @@ export const products: Product[] = [
     price: 198,
     pixPrice: 180,
     images: imageList("bolsa-baguete-alongada", 6),
+  },
+  {
+    id: "crossbody-mapa-piaui-guara",
+    name: "Crossbody - Estampa Mapa do Piauí com Guará",
+    category: "Bolsas",
+    subcategory: "Crossbody",
+    collection: "Crossbody",
+    description: "Tecido • 21 x 15 x 7 cm.",
+    details: [
+      "Crossbody com estampa do mapa do Piauí com Guará.",
+      "Uma peça prática para carregar o essencial com identidade regional SKAD.",
+    ],
+    material: "Tecido",
+    dimensions: "Tamanho: 21cm x 15cm x 7cm.",
+    images: imageList("crossbody-mapa-piaui-guara", 6),
   },
   {
     id: "bag-bella-clara-flor-preta",

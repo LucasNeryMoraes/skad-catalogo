@@ -264,16 +264,22 @@ export function ProductModal({ product, onClose }: { product: Product; onClose: 
                 {product.description}
               </p>
             )}
-            <div className="mt-3 grid max-w-[15rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:max-w-[18rem] lg:bg-[#171714] lg:text-[#fff7e7]">
-              <div className="border-r border-[#C8A45D]/35 px-3 py-2 lg:px-4 lg:py-3">
-                <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#9a7739] lg:text-[.62rem]">Cartão</span>
-                <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.price)}</strong>
+            {typeof product.price === "number" && typeof product.pixPrice === "number" ? (
+              <div className="mt-3 grid max-w-[15rem] grid-cols-2 overflow-hidden rounded-2xl border border-[#C8A45D]/45 bg-white/95 text-[#171714] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:max-w-[18rem] lg:bg-[#171714] lg:text-[#fff7e7]">
+                <div className="border-r border-[#C8A45D]/35 px-3 py-2 lg:px-4 lg:py-3">
+                  <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#9a7739] lg:text-[.62rem]">Cartão</span>
+                  <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.price)}</strong>
+                </div>
+                <div className="px-3 py-2 lg:px-4 lg:py-3">
+                  <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[.62rem]">Pix</span>
+                  <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.pixPrice)}</strong>
+                </div>
               </div>
-              <div className="px-3 py-2 lg:px-4 lg:py-3">
-                <span className="block text-[.56rem] font-bold uppercase tracking-[.18em] text-[#C8A45D] lg:text-[.62rem]">Pix</span>
-                <strong className="mt-1 block text-sm font-semibold lg:text-base">{formatCurrency(product.pixPrice)}</strong>
+            ) : (
+              <div className="mt-3 inline-flex rounded-2xl border border-[#C8A45D]/45 bg-white/95 px-4 py-3 text-sm font-bold uppercase tracking-[.14em] text-[#9a7739] shadow-[0_18px_45px_rgba(0,0,0,.18)] lg:mt-5 lg:bg-[#171714] lg:text-[#fff7e7]">
+                Preço sob consulta
               </div>
-            </div>
+            )}
             {product.details && (
               <div className="mt-4 space-y-3 rounded-3xl border border-white/15 bg-white/[.06] p-4 text-sm leading-6 text-white/86 backdrop-blur lg:mt-5 lg:border-[#C8A45D]/25 lg:bg-white/60 lg:text-black/68">
                 {product.material && (

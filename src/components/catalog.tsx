@@ -143,14 +143,22 @@ export function Catalog({ products }: { products: Product[] }) {
                   <div className="min-w-0 flex-1">
                     <h3 className="display text-[2rem] font-medium leading-[1.02] sm:text-[2.25rem] md:text-3xl">{product.name}</h3>
                     {product.description && <p className="mt-3 text-base leading-6 text-black/55 md:text-sm md:leading-5">{product.description}</p>}
-                    <div className="mt-4 flex flex-wrap items-center gap-2.5">
-                      <span className="rounded-full border border-black/10 bg-white/70 px-3.5 py-2 text-sm font-semibold text-[#171714] shadow-sm md:text-xs">
-                        Cartão {formatCurrency(product.price)}
-                      </span>
-                      <span className="rounded-full bg-[#171714] px-3.5 py-2 text-sm font-bold text-[#fff7e7] shadow-sm md:text-xs">
-                        Pix {formatCurrency(product.pixPrice)}
-                      </span>
-                    </div>
+                    {typeof product.price === "number" && typeof product.pixPrice === "number" ? (
+                      <div className="mt-4 flex flex-wrap items-center gap-2.5">
+                        <span className="rounded-full border border-black/10 bg-white/70 px-3.5 py-2 text-sm font-semibold text-[#171714] shadow-sm md:text-xs">
+                          Cartão {formatCurrency(product.price)}
+                        </span>
+                        <span className="rounded-full bg-[#171714] px-3.5 py-2 text-sm font-bold text-[#fff7e7] shadow-sm md:text-xs">
+                          Pix {formatCurrency(product.pixPrice)}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="mt-4">
+                        <span className="rounded-full border border-[#C8A45D]/40 bg-white/70 px-3.5 py-2 text-sm font-semibold text-[#9a7739] shadow-sm md:text-xs">
+                          Preço sob consulta
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <span className="mt-1 text-sm text-[#9a7739] md:text-xs">0{product.images.length}</span>
                 </div>
