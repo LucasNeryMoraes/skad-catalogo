@@ -29,6 +29,7 @@ model ProductCost {
   id            String         @id @default(cuid())
   productId     String         @unique
   marginPercent Decimal        @default(0) @db.Decimal(10, 2)
+  machinePercent Decimal       @default(0) @db.Decimal(10, 2)
   materials     CostMaterial[]
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt

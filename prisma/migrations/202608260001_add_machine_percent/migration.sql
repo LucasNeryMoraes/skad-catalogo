@@ -1,0 +1,1 @@
+ALTER TABLE "ProductCost" ADD COLUMN "machinePercent" DECIMAL(10, 2) NOT NULL DEFAULT 0;

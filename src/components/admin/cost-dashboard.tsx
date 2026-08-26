@@ -16,6 +16,7 @@ type MaterialRow = {
 type CostResponse = {
   productId: string;
   marginPercent: number;
+  machinePercent: number;
   materials: Array<{
     id: string;
     name: string;
@@ -71,6 +72,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
   const [selectedProductId, setSelectedProductId] = useState(products[0]?.id ?? "");
   const [query, setQuery] = useState("");
   const [marginPercent, setMarginPercent] = useState("0");
+  const [machinePercent, setMachinePercent] = useState("0");
   const [materials, setMaterials] = useState<MaterialRow[]>([emptyRow()]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -94,7 +96,9 @@ export function CostDashboard({ products }: { products: Product[] }) {
 
   const materialTotal = rowsWithSubtotal.reduce((total, row) => total + row.subtotal, 0);
   const profitValue = materialTotal * (toNumber(marginPercent) / 100);
-  const suggestedPrice = materialTotal + profitValue;
+  const pixPrice = materialTotal + profitValue;
+  const cardFeeValue = pixPrice * (toNumber(machinePercent) / 100);
+  const cardPrice = pixPrice + cardFeeValue;
 
   useEffect(() => {
     if (!selectedProductId) return;
@@ -118,6 +122,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
         if (!isCurrent) return;
 
         setMarginPercent(fromNumber(data.marginPercent));
+        setMachinePercent(fromNumber(data.machinePercent));
         setMaterials(
           data.materials.length
             ? data.materials.map((material) => ({
@@ -135,6 +140,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
           setMessage("Erro ao carregar os custos deste produto.");
           setMaterials([emptyRow()]);
           setMarginPercent("0");
+          setMachinePercent("0");
         }
       } finally {
         if (isCurrent) setIsLoading(false);
@@ -178,6 +184,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           marginPercent: toNumber(marginPercent),
+          machinePercent: toNumber(machinePercent),
           materials: materials
             .map((material) => ({
               name: material.name.trim(),
@@ -195,6 +202,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
 
       const data = (await response.json()) as CostResponse;
       setMarginPercent(fromNumber(data.marginPercent));
+      setMachinePercent(fromNumber(data.machinePercent));
       setMaterials(
         data.materials.length
           ? data.materials.map((material) => ({
@@ -285,23 +293,36 @@ export function CostDashboard({ products }: { products: Product[] }) {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[28rem]">
+          <div className="grid gap-3 sm:grid-cols-2 xl:min-w-[38rem] xl:grid-cols-4">
             <SummaryCard label="Material" value={currency.format(materialTotal)} />
             <SummaryCard label={`Lucro ${percent.format(toNumber(marginPercent))}%`} value={currency.format(profitValue)} />
-            <SummaryCard label="Sugerido" value={saleCurrency.format(suggestedPrice)} highlight />
+            <SummaryCard label="Preço Pix" value={saleCurrency.format(pixPrice)} highlight />
+            <SummaryCard label={`Preço Cartão ${percent.format(toNumber(machinePercent))}%`} value={saleCurrency.format(cardPrice)} highlight />
           </div>
         </div>
 
         <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <label className="block w-full max-w-xs">
-            <span className="eyebrow text-neutral-500">Margem de lucro (%)</span>
-            <input
-              value={marginPercent}
-              onChange={(event) => setMarginPercent(event.target.value)}
-              inputMode="decimal"
-              className="mt-2 h-12 w-full rounded-full border border-black/10 px-4 text-base font-semibold outline-none focus:border-gold focus:ring-4 focus:ring-gold/10"
-            />
-          </label>
+          <div className="grid w-full max-w-2xl gap-4 sm:grid-cols-2">
+            <label className="block">
+              <span className="eyebrow text-neutral-500">Margem de lucro (%)</span>
+              <input
+                value={marginPercent}
+                onChange={(event) => setMarginPercent(event.target.value)}
+                inputMode="decimal"
+                className="mt-2 h-12 w-full rounded-full border border-black/10 px-4 text-base font-semibold outline-none focus:border-gold focus:ring-4 focus:ring-gold/10"
+              />
+            </label>
+
+            <label className="block">
+              <span className="eyebrow text-neutral-500">% maquininha</span>
+              <input
+                value={machinePercent}
+                onChange={(event) => setMachinePercent(event.target.value)}
+                inputMode="decimal"
+                className="mt-2 h-12 w-full rounded-full border border-black/10 px-4 text-base font-semibold outline-none focus:border-gold focus:ring-4 focus:ring-gold/10"
+              />
+            </label>
+          </div>
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <button

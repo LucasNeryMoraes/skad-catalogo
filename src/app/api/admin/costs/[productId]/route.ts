@@ -26,6 +26,7 @@ const serializeCost = (
   productId: string,
   cost: {
     marginPercent: { toNumber: () => number } | number;
+    machinePercent: { toNumber: () => number } | number;
     materials: Array<{
       id: string;
       name: string;
@@ -40,6 +41,10 @@ const serializeCost = (
     typeof cost?.marginPercent === "number"
       ? cost.marginPercent
       : cost?.marginPercent.toNumber() ?? 0,
+  machinePercent:
+    typeof cost?.machinePercent === "number"
+      ? cost.machinePercent
+      : cost?.machinePercent.toNumber() ?? 0,
   materials:
     cost?.materials.map((material) => {
       const quantity =
@@ -99,10 +104,12 @@ export async function PUT(request: Request, context: { params: Params }) {
 
   const body = (await request.json()) as {
     marginPercent?: unknown;
+    machinePercent?: unknown;
     materials?: MaterialPayload[];
   };
 
   const marginPercent = Math.max(0, toNumber(body.marginPercent));
+  const machinePercent = Math.max(0, toNumber(body.machinePercent));
   const materials = Array.isArray(body.materials) ? body.materials : [];
 
   const sanitizedMaterials = materials
@@ -118,8 +125,8 @@ export async function PUT(request: Request, context: { params: Params }) {
   const cost = await prisma.$transaction(async (tx) => {
     const productCost = await tx.productCost.upsert({
       where: { productId },
-      update: { marginPercent },
-      create: { productId, marginPercent },
+      update: { marginPercent, machinePercent },
+      create: { productId, marginPercent, machinePercent },
     });
 
     await tx.costMaterial.deleteMany({
