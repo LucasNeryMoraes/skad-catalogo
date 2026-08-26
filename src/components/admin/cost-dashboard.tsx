@@ -29,6 +29,13 @@ type CostResponse = {
 const currency = new Intl.NumberFormat("pt-BR", {
   style: "currency",
   currency: "BRL",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
+const saleCurrency = new Intl.NumberFormat("pt-BR", {
+  style: "currency",
+  currency: "BRL",
   minimumFractionDigits: 0,
   maximumFractionDigits: 0,
 });
@@ -281,7 +288,7 @@ export function CostDashboard({ products }: { products: Product[] }) {
           <div className="grid gap-3 sm:grid-cols-3 xl:min-w-[28rem]">
             <SummaryCard label="Material" value={currency.format(materialTotal)} />
             <SummaryCard label={`Lucro ${percent.format(toNumber(marginPercent))}%`} value={currency.format(profitValue)} />
-            <SummaryCard label="Sugerido" value={currency.format(suggestedPrice)} highlight />
+            <SummaryCard label="Sugerido" value={saleCurrency.format(suggestedPrice)} highlight />
           </div>
         </div>
 
