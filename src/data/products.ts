@@ -304,6 +304,27 @@ export const products: Product[] = [
     images: imageList("crossbody-mapa-piaui-guara", 6),
   },
   {
+    id: "crossbody-revoada-dos-guaras",
+    name: "Crossbody - Estampa Revoada dos Guarás",
+    category: "Bolsas",
+    subcategory: "Crossbody",
+    collection: "Crossbody",
+    description: "Tecido • 21 x 15 x 7 cm.",
+    details: [
+      "Crossbody em tecido com estampa Revoada dos Guarás.",
+      "Uma peça prática, autoral e pensada para carregar o essencial com identidade SKAD.",
+    ],
+    features: [
+      "1 bolso externo com zíper",
+      "2 bolsos internos de acesso rápido",
+      "1 bolso interno com zíper",
+      "Alça regulável com fivela",
+    ],
+    material: "Tecido",
+    dimensions: "Tamanho: 21cm x 15cm x 7cm.",
+    images: imageList("crossbody-revoada-dos-guaras", 4),
+  },
+  {
     id: "bag-bella-clara-flor-preta",
     name: "Bag Bella - Clara com Flor Preta",
     category: "Bolsas",
