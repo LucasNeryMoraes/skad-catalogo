@@ -3,9 +3,13 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { Hero } from "@/components/hero";
 import { WhatsAppButton } from "@/components/whatsapp-button";
-import { products } from "@/data/products";
+import { getCatalogProducts } from "@/lib/catalog-pricing";
 
-export default function Home() {
+export const dynamic = "force-dynamic";
+
+export default async function Home() {
+  const products = await getCatalogProducts();
+
   return (
     <>
       <Header />
