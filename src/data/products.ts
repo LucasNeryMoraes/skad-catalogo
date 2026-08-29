@@ -6,6 +6,7 @@ export type Product = {
     | "Shoulder Bag"
     | "Max Bag"
     | "Bag Bella"
+    | "Bag Easy"
     | "Bag Boho"
     | "Bag Hexa"
     | "Bolsa Baguete"
@@ -212,6 +213,28 @@ export const products: Product[] = [
     images: imageList("max-bag-tecido", 5),
   },
   {
+    id: "bag-easy-alongada-bordada",
+    name: "Bag Easy Alongada - Bordada",
+    category: "Bolsas",
+    subcategory: "Bag Easy",
+    collection: "Bag Easy",
+    description: "Tecido • Bordada • 39 x 17 x 10,5 cm.",
+    details: [
+      "Bag Easy Alongada em tecido, com bordado e acabamento artesanal SKAD.",
+      "Modelo alongado, prático e elegante para acompanhar a rotina com organização.",
+    ],
+    features: [
+      "1 bolso externo com zíper",
+      "2 bolsos internos de acesso rápido",
+      "1 bolso interno com zíper",
+    ],
+    material: "Tecido",
+    dimensions: "Medida: 39cm x 17cm x 10,5cm.",
+    price: 291,
+    pixPrice: 264,
+    images: imageList("bag-easy-alongada-bordada", 6),
+  },
+  {
     id: "bag-hobo-urban-com-franjas",
     name: "Bag Boho Urban com Franjas",
     category: "Bolsas",
@@ -237,6 +260,27 @@ export const products: Product[] = [
     price: 270,
     pixPrice: 250,
     images: imageList("bag-hobo-urban", 4),
+  },
+  {
+    id: "bag-boho-chique-maya",
+    name: "Bag Boho Chique - Maya",
+    category: "Bolsas",
+    subcategory: "Bag Boho",
+    collection: "Bag Boho Chique",
+    description: "Tecido • Alça regulável • 30 x 26 cm.",
+    details: [
+      "Bag Boho Chique - Maya em tecido, com proposta leve, charmosa e funcional.",
+      "Uma peça artesanal com presença, ideal para compor produções com personalidade.",
+    ],
+    features: [
+      "1 bolso interno com zíper",
+      "Alça regulável com fivela",
+    ],
+    material: "Tecido",
+    dimensions: "Medida: 30cm x 26cm.",
+    price: 136,
+    pixPrice: 124,
+    images: imageList("bag-boho-chique-maya", 5),
   },
   {
     id: "bag-hexa",
