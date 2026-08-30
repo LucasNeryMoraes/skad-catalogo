@@ -280,7 +280,7 @@ export const products: Product[] = [
     dimensions: "Medida: 30cm x 26cm.",
     price: 136,
     pixPrice: 124,
-    images: imageList("bag-boho-chique-maya", 5),
+    images: ["/products/bag-boho-chique-maya/cover.jpg", ...imageList("bag-boho-chique-maya", 5)],
   },
   {
     id: "bag-hexa",
