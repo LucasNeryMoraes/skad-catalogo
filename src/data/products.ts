@@ -214,13 +214,13 @@ export const products: Product[] = [
   },
   {
     id: "bag-easy-alongada-bordada",
-    name: "Bag Easy Alongada - Bordada",
+    name: "Baguete East-West - com bordado",
     category: "Bolsas",
     subcategory: "Bag Easy",
     collection: "Bag Easy",
     description: "Tecido • Bordada • 39 x 17 x 10,5 cm.",
     details: [
-      "Bag Easy Alongada em tecido, com bordado e acabamento artesanal SKAD.",
+      "Baguete East-West em tecido, com bordado e acabamento artesanal SKAD.",
       "Modelo alongado, prático e elegante para acompanhar a rotina com organização.",
     ],
     features: [
@@ -309,7 +309,7 @@ export const products: Product[] = [
   },
   {
     id: "bolsa-baguete-alongada",
-    name: "Bolsa Baguete Alongada",
+    name: "Baguete Easy East-West",
     category: "Bolsas",
     subcategory: "Bolsa Baguete",
     collection: "Bolsa Baguete",
