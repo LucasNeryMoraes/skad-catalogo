@@ -4,8 +4,67 @@ import { prisma } from "@/lib/prisma";
 const toNumber = (value: { toNumber: () => number } | number) =>
   typeof value === "number" ? value : value.toNumber();
 
+type DbProduct = {
+  id: string;
+  name: string;
+  category: string;
+  subcategory: string | null;
+  collection: string | null;
+  description: string | null;
+  details: string[];
+  features: string[];
+  material: string | null;
+  dimensions: string | null;
+  price: { toNumber: () => number } | number | null;
+  pixPrice: { toNumber: () => number } | number | null;
+  images: Array<{ id: string }>;
+};
+
+const fromDbProduct = (product: DbProduct): Product => ({
+  id: product.id,
+  name: product.name,
+  category: product.category,
+  subcategory: product.subcategory ?? undefined,
+  collection: product.collection ?? undefined,
+  description: product.description ?? undefined,
+  details: product.details,
+  features: product.features,
+  material: product.material ?? undefined,
+  dimensions: product.dimensions ?? undefined,
+  price: product.price === null ? undefined : toNumber(product.price),
+  pixPrice: product.pixPrice === null ? undefined : toNumber(product.pixPrice),
+  images: product.images.map((image) => `/api/product-images/${image.id}`),
+  editable: true,
+});
+
+async function getDatabaseProducts() {
+  const dbProducts = await prisma.catalogProduct.findMany({
+    where: { active: true },
+    include: {
+      images: {
+        orderBy: { sortOrder: "asc" },
+        select: { id: true },
+      },
+    },
+    orderBy: [{ sortOrder: "asc" }, { createdAt: "asc" }],
+  });
+
+  return dbProducts.map(fromDbProduct).filter((product) => product.images.length > 0);
+}
+
+export async function getAllProducts(): Promise<Product[]> {
+  try {
+    const databaseProducts = await getDatabaseProducts();
+    return [...products, ...databaseProducts];
+  } catch (error) {
+    console.error("Erro ao carregar produtos cadastrados no banco.", error);
+    return products;
+  }
+}
+
 export async function getCatalogProducts(): Promise<Product[]> {
   try {
+    const allProducts = await getAllProducts();
     const costs = await prisma.productCost.findMany({
       include: {
         materials: true,
@@ -35,7 +94,7 @@ export async function getCatalogProducts(): Promise<Product[]> {
       }
     }
 
-    return products.map((product) => ({
+    return allProducts.map((product) => ({
       ...product,
       ...(pricesByProductId.get(product.id) ?? {}),
     }));

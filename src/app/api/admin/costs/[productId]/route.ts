@@ -68,8 +68,15 @@ async function requireAdmin() {
   return Boolean(session?.user?.role === "ADMIN");
 }
 
-function productExists(productId: string) {
-  return products.some((product) => product.id === productId);
+async function productExists(productId: string) {
+  if (products.some((product) => product.id === productId)) return true;
+
+  const product = await prisma.catalogProduct.findUnique({
+    where: { id: productId },
+    select: { id: true, active: true },
+  });
+
+  return Boolean(product?.active);
 }
 
 export async function GET(_request: Request, context: { params: Params }) {
@@ -79,7 +86,7 @@ export async function GET(_request: Request, context: { params: Params }) {
 
   const { productId } = await context.params;
 
-  if (!productExists(productId)) {
+  if (!(await productExists(productId))) {
     return NextResponse.json({ error: "Produto não encontrado." }, { status: 404 });
   }
 
@@ -98,7 +105,7 @@ export async function PUT(request: Request, context: { params: Params }) {
 
   const { productId } = await context.params;
 
-  if (!productExists(productId)) {
+  if (!(await productExists(productId))) {
     return NextResponse.json({ error: "Produto não encontrado." }, { status: 404 });
   }
 

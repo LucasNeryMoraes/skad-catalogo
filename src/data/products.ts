@@ -1,19 +1,8 @@
 export type Product = {
   id: string;
   name: string;
-  category: "Estojos" | "Necessaires" | "Lancheiras" | "Porta-Garrafa de até 1,2L" | "Bolsas";
-  subcategory?:
-    | "Shoulder Bag"
-    | "Max Bag"
-    | "Bag Bella"
-    | "Bag Easy"
-    | "Bag Boho"
-    | "Bag Hexa"
-    | "Bolsa Baguete"
-    | "Crossbody"
-    | "Bordado"
-    | "Pintado à Mão"
-    | "Lisos";
+  category: string;
+  subcategory?: string;
   description?: string;
   collection?: string;
   details?: string[];
@@ -23,6 +12,7 @@ export type Product = {
   price?: number;
   pixPrice?: number;
   images: string[];
+  editable?: boolean;
 };
 
 const imageList = (folder: string, count: number, extension = "jpg") =>

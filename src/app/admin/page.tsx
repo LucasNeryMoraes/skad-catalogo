@@ -2,8 +2,8 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { CostDashboard } from "@/components/admin/cost-dashboard";
 import { LogoutButton } from "@/components/admin/logout-button";
-import { products } from "@/data/products";
 import { authOptions } from "@/lib/auth";
+import { getAllProducts } from "@/lib/catalog-pricing";
 
 export const metadata = {
   title: "Admin | SKAD",
@@ -19,6 +19,8 @@ export default async function AdminPage() {
   if (!session) {
     redirect("/admin/login");
   }
+
+  const products = await getAllProducts();
 
   return (
     <main className="min-h-screen bg-cream px-3 py-6 text-ink sm:px-5 sm:py-8">
@@ -41,8 +43,8 @@ export default async function AdminPage() {
             <span className="font-semibold text-ink">
               {session.user?.username || session.user?.name}
             </span>
-            . Selecione um produto, edite os materiais usados e salve os custos
-            de produção no banco.
+            . Selecione um produto para editar custos ou cadastre novos produtos
+            do catálogo sem precisar mexer no código.
           </p>
         </div>
 

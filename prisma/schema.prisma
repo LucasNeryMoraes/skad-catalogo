@@ -49,3 +49,38 @@ model CostMaterial {
 
   @@index([productCostId, sortOrder])
 }
+
+model CatalogProduct {
+  id          String                @id @default(cuid())
+  name        String
+  category    String
+  subcategory String?
+  collection  String?
+  description String?
+  details     String[]              @default([])
+  features    String[]              @default([])
+  material    String?
+  dimensions  String?
+  price       Decimal?              @db.Decimal(12, 2)
+  pixPrice    Decimal?              @db.Decimal(12, 2)
+  active      Boolean               @default(true)
+  sortOrder   Int                   @default(0)
+  images      CatalogProductImage[]
+  createdAt   DateTime              @default(now())
+  updatedAt   DateTime              @updatedAt
+
+  @@index([active, sortOrder])
+  @@index([category, subcategory])
+}
+
+model CatalogProductImage {
+  id        String         @id @default(cuid())
+  productId String
+  product   CatalogProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  mimeType  String
+  data      Bytes
+  sortOrder Int            @default(0)
+  createdAt DateTime       @default(now())
+
+  @@index([productId, sortOrder])
+}
