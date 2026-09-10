@@ -404,8 +404,8 @@ export function CostDashboard({ products }: { products: Product[] }) {
         features: productForm.features,
         material: productForm.material,
         dimensions: productForm.dimensions,
-        price: toNumber(productForm.price),
-        pixPrice: toNumber(productForm.pixPrice),
+        price: productForm.price.trim() ? toNumber(productForm.price) : null,
+        pixPrice: productForm.pixPrice.trim() ? toNumber(productForm.pixPrice) : null,
         keepImageIds: productForm.keepImages.map(imageIdFromUrl),
         images: productForm.newImages,
       };
