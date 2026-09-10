@@ -213,6 +213,28 @@ export const products: Product[] = [
     images: imageList("max-bag-tecido", 5),
   },
   {
+    id: "max-bag-p",
+    name: "Max Bag P",
+    category: "Bolsas",
+    subcategory: "Max Bag",
+    collection: "Max Bag",
+    description: "Tecido • 39 x 21 x 7 cm.",
+    details: [
+      "Max Bag P em tecido, com tamanho compacto e acabamento artesanal SKAD.",
+      "Modelo prático para acompanhar a rotina com organização e sofisticação.",
+    ],
+    features: [
+      "1 bolso externo com zíper",
+      "2 bolsos internos de acesso rápido",
+      "1 bolso interno com zíper",
+    ],
+    material: "Tecido",
+    dimensions: "Tamanho: 39cm x 21cm x 7cm.",
+    price: 177,
+    pixPrice: 161,
+    images: imageList("max-bag-p", 5),
+  },
+  {
     id: "bag-easy-alongada-bordada",
     name: "Baguete East-West - com bordado",
     category: "Bolsas",
